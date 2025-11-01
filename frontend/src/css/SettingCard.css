@@ -1,0 +1,61 @@
+.setting-icon {
+    width: 17px;
+    height: 17px;
+}
+
+div.horizontal-flex {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding-left: 10px;
+}
+
+div.center-vertical {
+    display: flex;
+    align-items: center
+}
+
+div.space-between {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+div.space {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+}
+
+div.icon-container {
+    margin-right: 10px;
+    height: 100%;
+    display: flex;
+    justify-self: center;
+    align-items: center;
+}
+
+div.setting-name {
+    font-size: 18px;
+    font-weight: 600;
+}
+
+div.settings-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    margin-top: 5px;
+    gap: 10px;
+}
+
+div.back-button {
+    height: 100%;
+    display: flex;
+    justify-self: center;
+    align-items: center;
+}

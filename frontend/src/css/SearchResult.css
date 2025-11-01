@@ -1,0 +1,17 @@
+div.league-name {
+    font-size: 18px;
+    font-weight: 600;
+    color: black;
+}
+
+div.bottom-container {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    height: 35px;
+}
+
+div.league-buttons {
+    display: flex;
+    gap: 7px;
+}

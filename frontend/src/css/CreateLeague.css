@@ -1,0 +1,27 @@
+div.container {
+    border: 1px solid black;
+    display: flex;
+    justify-content: center;
+}
+
+div.search-results {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+    width: 100%;
+    margin-top: 10px;
+}
+
+div.loading {
+    animation: fade_in 0.1s forwards;
+}
+
+div.no-results {
+    animation: fade_in 0.1s forwards;
+}
+
+ul.bulleted-list {
+    list-style-type: disc;
+    padding-left: 35px;
+}

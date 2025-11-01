@@ -1,0 +1,29 @@
+div.header-backbutton {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.nav-button {
+    height: 22px;
+    width: 22px;
+    padding: 0px;
+    border-radius: 5px;
+    /* background-color: rgba(0, 0, 0, 0.1); */
+    color: black;
+    /* box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2); */
+}
+.nav-button:hover {
+    color: rgba(0, 0, 0, 0.5);
+}
+
+div.draft-container {
+    margin-top: 5px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+div.draft-card {
+    margin-bottom: 10px;
+}

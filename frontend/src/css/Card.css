@@ -1,0 +1,83 @@
+.generic-card {
+    min-height: 100%;
+    box-sizing: border-box;
+    box-shadow: 4px 4px 10px 0 rgba(0, 0, 0, 0.15);
+    background-color: white;
+    color: rgb(115, 115, 115);
+    border-radius: 7px;
+    padding: 15px;
+    animation: fade_in 0.05s ease-out forwards;
+    overflow-x: scroll;
+}
+
+.glass-card {
+  overflow-x: auto;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  background: rgba(255, 255, 255, 0.1);
+  /* border-radius: 8px; */
+  border-radius: 12px;
+  box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.15);
+  backdrop-filter: blur(0px); /* the glass effect */
+  -webkit-backdrop-filter: blur(10px); /* for Safari */
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  padding: 10px;
+  color: rgb(60, 60, 60);
+  animation: fade_in 0.15s ease-out forwards;
+  transition: background-color 0.2s linear;
+}
+
+.card-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+.card-hover:hover {
+  cursor: pointer;
+  /* background-color: rgba(234, 243, 255, 1); */
+  /* background-color: rgba(213, 231, 255, 0.7); */
+  background-color: rgba(0, 0, 0, 0.01);
+  /* border: 1px solid rgb(133, 186, 255); */
+  /* border: 1px solid rgba(0, 0, 0, 0.1); */
+  color: black;
+  transition: background-color 0.2s linear;
+}
+/* Target the horizontal scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px; /* Height for horizontal scrollbar */
+}
+
+/* Track (the background of the scrollbar) */
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* Thumb (the draggable part) */
+::-webkit-scrollbar-thumb {
+  background: rgba(208, 216, 230, 0.8);
+  border-radius: 6px;
+}
+
+/* On hover */
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(208, 216, 230, 1);
+  cursor: pointer;
+}
+
+@keyframes fade_in {
+    from {
+      opacity: 0;
+      transform: translateY(5px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }

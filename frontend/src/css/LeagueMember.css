@@ -1,0 +1,101 @@
+span.username-container {
+    font-weight: 600;
+}
+
+select.team-assignment {
+    border-radius: 5px;
+    padding-left: 5px;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    width: 200px;
+    height: 100%;
+}
+
+div.content-gap {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+select.team-assignment:focus {
+    outline: none;
+}
+
+option {
+    color: black;
+    font-size: 14px;
+}
+
+span.league-role {
+    font-style: italic;
+    font-size: 14px;
+}
+
+div.team-dropdown-container {
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    gap: 15px;
+    width: 100%;
+}
+select.team-dropdown {
+    cursor: default;
+    width: 200px;
+    height: 30px;
+    padding-left: 10px;
+    border: 1px solid rgb(185, 185, 185);
+    background-color: rgba(255, 255, 255, 0.3);
+    border-radius: 5px;
+}
+
+select.team-dropdown:focus {
+    outline: none;
+}
+
+div.save-container {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.delete-button {
+    width: 17px;
+    height: 17px;
+}
+
+.delete-button:hover {
+    cursor: pointer;
+}
+
+div.delete-button-container {
+    display: flex;
+    align-items: center;
+    width: 17px;
+    height: 100%;
+}
+
+.bold {
+    font-weight: 600;
+}
+
+div.commish-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+div.league-member-grid {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 300px 100px 25px;
+}
+
+div.league-member-heading {
+    padding: 5px;
+    font-weight: 600;
+    font-size: 14px;
+}

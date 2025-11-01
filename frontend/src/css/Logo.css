@@ -1,0 +1,7 @@
+span.logo {
+    display: inline-block;
+    font-size: 28px;
+    padding: 5px;
+    font-weight: 800;
+    color: black;
+}

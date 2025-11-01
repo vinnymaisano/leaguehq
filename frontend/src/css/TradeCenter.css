@@ -1,0 +1,94 @@
+div.roster-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 10px;
+}
+
+div.trade-roster-container {
+    display: flex;
+    flex-direction: column;
+    
+    gap: 10px;
+}
+
+div.add-player {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+}
+
+div.add-player:hover {
+    cursor: pointer;
+}
+
+.select-players-button {
+    border-radius: 5px; 
+    border: 2px solid rgba(198, 216, 255, 0.3);
+    background: rgba(205, 218, 240, 0.8);
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+    width: 150px;
+    padding: 10px;
+}
+
+div.cap-info {
+    border-radius: 5px;
+    border: 2px solid rgba(198, 216, 255, 0.3);
+    /* background: rgba(205, 218, 240, 0.8); */
+    background: rgba(205, 218, 240, 0.2);
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+    padding: 5px;
+    width: 180px;
+}
+
+div.cap-info-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    flex-flow: wrap;
+}
+
+span.net-positive {
+    color: rgb(0, 130, 0);
+    font-weight: 600;
+}
+
+span.net-negative {
+    color: rgb(140, 0, 0);
+    font-weight: 600;
+}
+
+div.trade-card-content {
+    min-width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+div.add-player-button {
+    display: inline-flex;
+    gap: 5px;
+    background-color: rgba(255, 255, 255, 0.4);
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    height: 40px;
+    /* width: 200px; */
+    padding: 15px;
+    font-weight: 600;
+    border-radius: 100px;
+    overflow: hidden;
+}
+
+div.add-player-button:hover {
+    background-color: rgba(240, 240, 240, 0.5)
+}

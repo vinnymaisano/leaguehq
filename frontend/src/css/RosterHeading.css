@@ -1,0 +1,63 @@
+div.heading {
+    min-width: 100%;
+    min-height: 60px;
+    margin-bottom: 5px;
+    border-radius: 10px;
+    padding: 10px;
+    border: 1px solid #ffffff4d;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    background: rgba(205, 218, 240, 0.2);
+    transition: width 1s linear;
+}
+
+span.placeholder {
+    min-width: 310px;
+}
+
+.team_name {
+    font-weight: 600;
+    height: 100%;
+    color: black;
+    font-size: 22px;
+    grid-column: span 3;
+}
+
+select {
+    /* -webkit-appearance: none; */
+    /* -moz-appearance: none; */
+    /* appearance: none; */
+} 
+
+select.team {
+    /* -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none; */
+    height: 100%;
+    border-radius: 10px;
+    padding-left: 10px;
+    width: 100%;
+    transition: background-color 0.3s ease;
+    outline: none;
+    /* border: 1px solid rgb(229, 229, 229); */
+    /* box-shadow: 2px 2px 7px rgba(0, 0, 0, 0.05); */
+    /* background-color: rgba(255, 255, 255, 0.2); */
+}
+
+option {
+    border-radius: 10px;
+    font-size: 14px;
+}
+
+select:hover {
+    cursor: pointer;
+    /* background-color: rgba(255, 255, 255, 0.15); */
+    background-color: rgba(255, 255, 255, 0.3);
+}
+
+span.col_header {
+    color: black;
+    font-weight: 600;
+    margin-right: 15px;
+    width: 100%;
+    text-align: center;
+}

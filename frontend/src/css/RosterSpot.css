@@ -1,0 +1,97 @@
+div.roster_spot {
+    box-sizing: border-box;
+    display: grid;
+    align-items: center;
+    gap: 10px;
+    height: 50px;
+    background-color: rgba(255, 255, 255, 0.1);
+    /* background: rgba(234, 242, 255, 0.5); */
+    margin-top: 6px;
+    border-radius: 10px;
+    /* border: 1px solid rgba(255, 255, 255, 0.5); */
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    animation: slide_in 0.1s ease-out forwards;
+}
+
+div.selected {
+    border: 1px solid rgba(139, 180, 255, 0.4);
+    background-color: #f0f6f8;
+}
+
+div.selectable:hover {
+    cursor: pointer;
+}
+
+div.roster_spot > span {
+    display: flex;
+    align-items: center;
+}
+
+span.name, span.info, span.stats {
+    color: rgb(10, 10, 10);
+}
+
+@keyframes slide_in {
+    from {
+      transform: translateX(5px);
+    }
+    to {
+      transform: translateX(0);
+    }
+  }
+
+span.position {
+    box-sizing: border-box;
+    justify-content: center;
+    border-radius: 8px;
+    width: 100%;    
+    color: rgb(250, 250, 250);
+    padding: 5px;
+    padding-bottom: 7px;
+    padding-top: 7px;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+span.stats {
+    justify-content: center;
+}
+
+span.contract:hover {
+    cursor: help;
+}
+
+span.QB {   
+    background-color: rgba(255, 42, 109, 1);
+}
+
+span.RB {
+    background-color: rgba(0, 189, 170, 1);
+}
+
+span.WR { 
+    background-color: rgba(88, 167, 255, 1);
+}
+span.TE {
+    background-color: rgba(255, 174, 88, 1);
+}
+
+span.K {
+    background-color: #bd66ff;
+}
+
+span.def {
+    background: #7988a1;
+    color: #fff;
+}
+
+span.team {
+    justify-content: center;
+    color: rgb(75, 75, 75);
+    font-size: 12px;
+    font-weight: 600;
+}

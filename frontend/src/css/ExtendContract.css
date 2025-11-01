@@ -1,0 +1,46 @@
+.extend-button {
+    color: rgba(0, 0, 0, 0.25);
+    width: 15px;
+}
+.extend-button:hover {
+    cursor: pointer;
+}
+
+div.extension-form-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    border-radius: 10px;
+}
+
+/* div.salary-years {
+    border: 1px solid black;
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    margin-bottom: 10px;
+} */
+
+div.salary-years {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    display: flex;
+    width: 350px;
+    justify-content: space-between;
+}
+
+div.contract-label {
+    font-weight: 600;
+}
+
+
+.contract-info {
+    width: 100px;
+    height: 40px;
+    padding-left: 10px;
+    border: 1px solid rgb(185, 185, 185);
+    background-color: rgba(255, 255, 255, 0.3);
+    border-radius: 5px;
+}

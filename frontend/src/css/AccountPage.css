@@ -1,0 +1,38 @@
+input.user-info {
+    height: 30px;
+    padding-left: 10px;
+    border: 1px solid rgb(185, 185, 185);
+    background-color: rgba(255, 255, 255, 0.3);
+    border-radius: 5px;
+}
+
+div.center {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+span.link {
+    color: black;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+span.link:hover {
+    color: rgb(95, 95, 95);
+}
+
+div.dialog-input-container {
+    width: 100%;
+}
+input.dialog-password {
+    width: 100%;
+}
+
+span.note {
+    font-size: 14px;
+    font-weight: 600;
+    color: black;
+}

@@ -1,0 +1,43 @@
+div.budgetbar-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    margin-top: 5px;
+}
+
+div.budgetbar {
+    display: flex;
+    height: 15px;
+    width: 100%;
+    border-radius: 4px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.2);
+    padding: 0px;
+}
+
+div.budget-used, div.budget-free {
+    border-radius: 3px;
+    height: 100%;
+    transition: background-color 0.7s linear;
+}
+
+div.budget-used {
+    background-color: rgba(255, 255, 255, 0.65);
+    transition: width 1s linear;
+}
+
+div.year {
+    font-size: 18px;
+    font-weight: 600;
+    color: black;
+}
+
+div.space-between-budget {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}

@@ -1,0 +1,7 @@
+div.row {
+    /* border: 1px solid black; */
+    display: flex;
+    align-items: flex-start;
+    flex-direction: row;
+    gap: 10px;
+}
