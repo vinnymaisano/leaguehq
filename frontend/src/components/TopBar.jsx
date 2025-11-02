@@ -7,7 +7,7 @@ export default function TopBar() {
     return (
         <Card padding={"5px"} height={"100%"}>
             <div className="topbar-content">
-                <span className="info-bold">{league?.name}</span> <span className="info-secondary">{leagueYear} season</span>
+                <span className="info-bold">{league?.name}</span> <span className="info-secondary">{leagueYear != -1 ? `${leagueYear} season` : ""}</span>
             </div>
         </Card>
     )

@@ -23,7 +23,6 @@ export default defineConfig({
     }
   },
   build: {
-    // outDir: path.resolve(__dirname, 'frontend/build'),  // build output goes to /build
     outDir: "/var/www/leaguehq"
   }
 })

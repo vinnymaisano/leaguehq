@@ -1596,7 +1596,7 @@ export async function fetch_user_sub_history(user_id) {
         throw err
     }
 
-    const sub_history = await Subscription.find({purchased_by: user._id}).populate("purchased_by", "username")
+    const sub_history = (await Subscription.find({purchased_by: user._id}).sort({"purchased_at": -1}).populate("purchased_by", "username"))
 
        const enriched = await Promise.all(sub_history.map(async (sub) => {
         let league_name = null

@@ -38,7 +38,6 @@ export function AuthProvider({ children }) {
             const res = await axios.post("/auth/login", formData, {
                 withCredentials: true
             })
-            console.log("response:", res.data)
             setUser(res.data.user)
             return { success: true }
         } catch (err) {
