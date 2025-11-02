@@ -20,7 +20,7 @@ export default function ExtendButton({current_salary, start_year, name, current_
         }
         try {
             const url = `/api/${league_id}/contracts/extend/${current_contract._id}`
-            console.log(url)
+            // console.log(url)
             const res = await axios.post(
                 url,
                 {length},

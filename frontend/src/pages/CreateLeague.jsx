@@ -26,7 +26,7 @@ export default function CreateLeague() {
             const leagues = await axios.post(
                 "/api/leagues/search", formData
             )
-            console.log(leagues.data)
+            // console.log(leagues.data)
             setResults(leagues.data)
         } catch (err) {
             console.error("Error fetching leagues: ", err.message)

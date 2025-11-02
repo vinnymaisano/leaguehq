@@ -38,7 +38,7 @@ export default function LeagueMembersPage() {
                 setAssignments(teamRes.data.teams)
                 setUsers(userRes.data)
                 setCommissioners(league.commissioners)
-                console.log(league.commissioners)
+                // console.log(league.commissioners)
             } catch (err) {
                 console.error("Error fetching team data: ", err.message)
             } finally {
@@ -59,10 +59,10 @@ export default function LeagueMembersPage() {
 
     function update_commissioners(user_id) {
         if (commissioners.includes(user_id)) {
-            console.log(commissioners.filter(id => id !== user_id))
+            // console.log(commissioners.filter(id => id !== user_id))
             setCommissioners(prev => prev.filter(id => id !== user_id))
         } else {
-            console.log([...commissioners, user_id])
+            // console.log([...commissioners, user_id])
             setCommissioners(prev => [...prev, user_id])
         }
     }

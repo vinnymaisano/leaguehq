@@ -17,7 +17,7 @@ export default function EditContractButton({contracts, name, player_id}) {
                     {withCredentials: true}
                 )
                 setShowDialog(false)
-                console.log("changes:", res.data.changes)
+                // console.log("changes:", res.data.changes)
                 if (res.data.changes) window.location.reload()
             } catch (err) {
                 console.error("Error updating contracts: ", err.response.data.message)
@@ -28,7 +28,6 @@ export default function EditContractButton({contracts, name, player_id}) {
     async function create_contract(new_contract) {
         const timestamp = new Date()
         try {
-            console.log()
             const res = await axios.post(
                 "/api/contracts/create",
                 {
@@ -49,7 +48,6 @@ export default function EditContractButton({contracts, name, player_id}) {
     async function delete_contract(contract_id) {
         try {
             const res = await axios.delete(`/api/contracts/delete/${contract_id}`)
-            console.log(res.data)
             setShowDialog(false)
             window.location.reload()
         } catch (err) {

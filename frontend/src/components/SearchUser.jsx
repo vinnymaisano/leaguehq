@@ -15,7 +15,7 @@ export default function SearchUser() {
 
     // need api route to invite a user
     async function search() {
-        console.log("searching", query)
+        // console.log("searching", query)
         // avoid calling the api if no text entered
         if (!query) {
             setResults([])

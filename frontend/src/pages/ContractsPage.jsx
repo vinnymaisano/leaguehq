@@ -100,7 +100,7 @@ export default function ContractsPage() {
                 setLoading(true)
                 // call sleeper api to get rosters (list of player ids for each team)
                 const roster_res = await axios.get(`https://api.sleeper.app/v1/league/${sleeper_league_id}/rosters`)
-                console.log(roster_res.data)
+                // console.log(roster_res.data)
                 // flatten out into one giant list of player ids
                 const all_player_ids = roster_res.data.flatMap(team => team.players || [])
                 // get names, teams, positions, contract info for all of these payers

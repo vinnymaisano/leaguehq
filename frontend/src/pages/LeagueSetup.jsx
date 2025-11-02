@@ -97,9 +97,9 @@ export default function LeagueSetup() {
 
     function change_salary_data(e) {
         const {name, value} = e.target
-        console.log(name, value)
+        // console.log(name, value)
         if (isNaN(value.slice(1))) {
-            console.log("returning")
+            // console.log("returning")
             return
         }
 
@@ -115,7 +115,7 @@ export default function LeagueSetup() {
 
     async function submit_form(e) {
         e.preventDefault()
-        console.log(formData)
+        // console.log(formData)
         try {
             setLoading(true)
             // creates the league

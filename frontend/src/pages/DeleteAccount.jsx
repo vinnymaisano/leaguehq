@@ -12,7 +12,7 @@ export default function DeleteAccount() {
     const {user, refresh_user, loadingAuth} = useAuth()
 
     async function delete_account(password) {
-        console.log('delete_account')
+        // console.log('delete_account')
         try {
             const url = "/auth/me"
             const res = await axios.delete(url, {
