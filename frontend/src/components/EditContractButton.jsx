@@ -27,7 +27,15 @@ export default function EditContractButton({contracts, name, player_id}) {
 
     async function create_contract(new_contract) {
         const timestamp = new Date()
+        console.log("create function")
         try {
+            console.log("body:", {
+                    new_contract,
+                    txn_time: timestamp,
+                    import_time: timestamp,
+                    createdAt: timestamp,
+                    updatedAt: timestamp
+                })
             const res = await axios.post(
                 "/api/contracts/create",
                 {

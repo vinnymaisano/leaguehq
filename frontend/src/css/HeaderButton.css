@@ -28,7 +28,7 @@ span.header-button:hover {
     cursor: pointer;
     font-size: 14px;
     font-weight: 500;
-    min-width: 90px;
+    min-width: 80px;
     padding-left: 10px;
     padding-right: 10px;
     height: 35px;
@@ -56,5 +56,5 @@ span.header-button:hover {
 }
 
 .with-background:hover {
-    background-color: rgb(61, 61, 61);
+    background-color: rgb(50, 50, 50);
 }

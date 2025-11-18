@@ -26,7 +26,7 @@
   padding: 10px;
   color: rgb(60, 60, 60);
   animation: fade_in 0.15s ease-out forwards;
-  transition: background-color 0.2s linear;
+  transition: background-color 0.1s linear;
 }
 
 .card-content {

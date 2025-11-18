@@ -186,6 +186,7 @@ export default function ContractsPage() {
                             return (
                                 <RosterSpot
                                     key={player._id}
+                                    player_id={player._id}
                                     position={player.position}
                                     team={player.team}
                                     name={player.full_name}
