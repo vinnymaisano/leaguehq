@@ -8,10 +8,13 @@ div.log-container {
 }
 
 div.transaction {
-    background-color: rgba(255, 255, 255, 0.2);
-    /* border: 2px solid rgba(150, 150, 150, 0.1); */
-    border: 2px solid rgba(163, 187, 211, 0.2);
-    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px;
+    color: black;
+    /* border-bottom: 1px solid rgba(0, 0, 0, 0.1); */
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
     padding: 10px;
     animation: fade_in 0.15s ease-out forwards;
 }
@@ -32,28 +35,41 @@ span.player-name {
     font-weight: 600;
 }
 
-/* div.txn-type {
-    font-weight: 600;
-    font-size: 16px;
-} */
-
 div.txn-message {
     font-size: 16px;
     padding-left: 10px;
+    color: black;
 }
 
-div.txn-type {
-    /* border: 1px solid black; */
+.txn-type {
     font-weight: 600;
     color: black;
-    padding: 3px;
-    padding-left: 10px;
-    padding-right: 10px;
-    display: inline-block;
-    background-color: rgba(163, 187, 211, 0.2);
+    padding: 3px 10px 3px 10px;
     border-radius: 16px;
-    /* width: 50px; */
+    color: white;
 }
+
+.trade-extension {
+    border: 1px solid rgba(0, 49, 198, 1);
+    color: rgba(0, 49, 198, 1);
+}
+
+.free_agent {
+    border: 1px solid rgba(0, 110, 0, 1);
+    color: rgba(0, 110, 0, 1);
+}
+
+.waiver {
+    border: 1px solid rgba(237, 150, 0);
+    color: rgba(237, 150, 0);
+}
+
+.generic_txn {
+    border: 1px solid rgba(40, 40, 40, 1);
+    color: rgba(40, 40, 40, 1);
+}
+
+
 .scroll-gap {
     padding: 5px;
     display: flex;

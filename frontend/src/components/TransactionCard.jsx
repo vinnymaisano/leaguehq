@@ -22,29 +22,25 @@ export default function TransactionCard({txn, teams, roster_map, draft}) {
         return num + suffix;
     }
 
-    let color = ""
+    let txn_type
     switch (txn.type) {
         case "extension":
         case "trade":
-            color = "rgba(28, 62, 161, 1)"
+            txn_type = "trade-extension"
             break
         case "free_agent":
         case "commissioner":
-            color = "rgba(0, 110, 0, 1)"
+            txn_type = "free_agent"
             break
         case "waiver":
-            color = "rgba(172, 123, 0, 1)"
+            txn_type = "waiver"
             break
         case "draft_import":
         case "draft_delete":
         case "create_contract":
-            // color = "rgba(19, 64, 38, 1)"
-            // break
         case "delete_contract":
-            // color = "rgba(102, 41, 31, 1)"
-            // break
         case "edit_contract":
-            color = "rgba(40, 40, 40, 1)"
+            txn_type = "generic_txn"
             break
     }
 
@@ -192,7 +188,7 @@ export default function TransactionCard({txn, teams, roster_map, draft}) {
 
     return (
         <div className="transaction">
-            <div style={{color}} className="txn-type">{type}</div>
+            <span className={`txn-type ${txn_type}`}>{type}</span>
             <div className="txn-message">{message}</div>
             <div className="date">{date.toLocaleString(undefined, options)}</div>
         </div>

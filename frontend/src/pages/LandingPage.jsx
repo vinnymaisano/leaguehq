@@ -25,7 +25,7 @@ export default function LandingPage() {
                 </div>
 
                 <div className="landing-section-dark">
-                    saflkj
+                    <div className="landing-heading">Import your dynasty league from the Sleeper platform</div>
                 </div>
 
             </div>

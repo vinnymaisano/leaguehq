@@ -16,20 +16,25 @@ div.landing-container {
     align-items: center;
 }
 
-div.landing-section-light {
+div.landing-section-light, div.landing-section-dark {
     display: flex;
     flex-direction: column;
     gap: 10px;
-    width: 1000px;
-    /* border: 1px solid black; */
-    /* background-color: rgba(0, 0, 0, 0.05); */
+    width: 100%;
+    padding-left: 20%;
+    padding-right: 20%;
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+
+@media (max-width: 1500px) {
+    div.landing-section-light, div.landing-section-dark {
+        padding-left: 0px;
+        padding-right: 0px;
+    }
 }
 
 div.landing-section-dark {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    width: 1000px;
     background-color: rgba(0, 0, 0, 0.03);
 }
 
@@ -44,8 +49,13 @@ div.landing-headline {
 }
 
 div.landing-subheadline {
-    font-weight: 400;
+    font-weight: 800;
     font-size: 18px;
+}
+
+div.landing-heading {
+    font-weight: 800;
+    font-size: 24px;
 }
 
 div.landing-mainpanel {

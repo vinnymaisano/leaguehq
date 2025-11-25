@@ -3,8 +3,9 @@ div.layout {
   grid-template-columns: 250px 1fr;
   grid-template-rows: 45px 1fr;
   height: 100%;
+  background-color: #edf2f9;
   /* background-color: rgb(237, 238, 240); */
-  background-color: rgb(212, 218, 231);
+  /* background-color: rgb(212, 218, 231); */
   /* background: linear-gradient(to top right, rgba(208, 217, 230, 0.4), rgba(208, 216, 230)); */
   /* background: linear-gradient(to top right, rgb(0, 9, 27), rgb(0, 6, 12)); */
   /* background-color: rgb(235, 242, 255); */
