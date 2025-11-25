@@ -159,6 +159,28 @@ export default function ContractsPage() {
     //     )
     // }
 
+    // escape characters that have special meaning in regex
+    const escapeRegExp = (string) => string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+
+    /**
+     * Creates a case-insensitive regex after sanitizing the user query.
+     * @param {string} query - The user's input string.
+     * @returns {RegExp} The compiled search regex.
+     */
+    const createSanitizedRegex = (query) => {
+        // 1. Sanitize the query: remove all periods ('.') and apostrophes ('')
+        const sanitizedQuery = query.replace(/['.]/g, ''); 
+        
+        // 2. Escape the sanitized string for regex special characters
+        const escapedQuery = escapeRegExp(sanitizedQuery);
+        
+        // 3. Create the regex (case-insensitive flag 'i')
+        return new RegExp(escapedQuery, "i");
+    };
+
+    const searchRegex = createSanitizedRegex(query)
+    const sanitizePlayerName = (name) => name.replace(/['.]/g, '');
+
     return (
         <MainPanel>
             <Row height={"100%"} center={true}>
@@ -179,31 +201,33 @@ export default function ContractsPage() {
                         <div>These players must be either extended (if eligible) or dropped after this season.</div>
                     )}
 
-                    {filteredPlayers && filteredPlayers.map(player => {
-                        const escapeRegExp = (string) => string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
-                        const regex = new RegExp(escapeRegExp(query), "i")
-                        if (regex.test(player.full_name)) {
-                            return (
-                                <RosterSpot
-                                    key={player._id}
-                                    player_id={player._id}
-                                    position={player.position}
-                                    team={player.team}
-                                    name={player.full_name}
-                                    age={compute_age(player.birth_date)}
-                                    salary={get_salary_array(player.contracts)}
-                                    num_years={max_year - (new Date().getFullYear())+1}
-                                    extension={player.contracts.length > 0 && player.contracts[player.contracts.length-1].extension_eligible}
-                                    subscription={subStatus}
-                                    can_edit={subPurchased && (isOwner || isCommish)}
-                                    contract_type={player.contracts.length > 0 && player.contracts[player.contracts.length-1].contract_type}
-                                    contracts={player.contracts}
-                                
-                                />
-                            )
-                        }
+                        <div className="roster-scroll">
+                            {filteredPlayers && filteredPlayers.map(player => {
 
-                    })}
+                                if (searchRegex.test(sanitizePlayerName(player.full_name))) {
+                                    return (
+                                        <RosterSpot
+                                            key={player._id}
+                                            player_id={player._id}
+                                            position={player.position}
+                                            team={player.team}
+                                            name={player.full_name}
+                                            age={compute_age(player.birth_date)}
+                                            salary={get_salary_array(player.contracts)}
+                                            num_years={max_year - (new Date().getFullYear())+1}
+                                            extension={player.contracts.length > 0 && player.contracts[player.contracts.length-1].extension_eligible}
+                                            subscription={subStatus}
+                                            can_edit={subPurchased && (isOwner || isCommish)}
+                                            contract_type={player.contracts.length > 0 && player.contracts[player.contracts.length-1].contract_type}
+                                            contracts={player.contracts}
+                                        
+                                        />
+                                    )
+                                }
+
+                            })}
+                        </div>
+
                     </div>
                     {loading && (
                         <div className="spinner-container">

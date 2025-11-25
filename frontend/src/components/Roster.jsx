@@ -24,7 +24,7 @@ export default function Roster({selected_roster, can_edit, max_year, inDialog, s
         )
     }
 
-    const classname = `scroll ${inDialog ? "dialog" : ""}`
+    const classname = `scroll ${inDialog ? "dialog" : ""} roster-scroll`
 
     const visible_roster = !inDialog ? selected_roster.filter(player => selectedPlayerIDs.includes(player._id)) : selected_roster
 

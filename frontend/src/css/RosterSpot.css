@@ -1,15 +1,10 @@
 div.roster_spot {
+    border-radius: 5px;
     box-sizing: border-box;
     display: grid;
     align-items: center;
     gap: 10px;
-    height: 50px;
-    background-color: rgba(255, 255, 255, 0.1);
-    /* background: rgba(234, 242, 255, 0.5); */
-    margin-top: 6px;
-    border-radius: 10px;
-    /* border: 1px solid rgba(255, 255, 255, 0.5); */
-    border: 1px solid rgba(255, 255, 255, 0.3);
+    height: 50x;
     padding-left: 10px;
     padding-right: 10px;
     padding-top: 5px;

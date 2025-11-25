@@ -3,6 +3,7 @@ div.header-layout {
     grid-template-rows: 75px 1fr;
     grid-template-columns: 1fr;
     height: 100vh;
+    background-color: #edf2f9;;
     /* background: linear-gradient(to top right, rgba(208, 217, 230, 0.4), rgba(208, 216, 230)); */
     /* background-color: rgb(235, 242, 255); */
     /* background: linear-gradient(to top right, rgb(235, 242, 255), rgb(195, 209, 234)); */
@@ -21,7 +22,7 @@ div.header-content {
 
 div.header {
     padding: 5px;
-    background-color: transparent;
+    background: none;
     height: 100%;
 }
 

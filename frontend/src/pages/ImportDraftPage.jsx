@@ -45,6 +45,7 @@ export default function ImportDraftPage() {
                     </div>
          
                     <div className="league-name">{league? `Drafts from ${league.name}`: ""}</div>
+                    {!subStatus && <div>Subscription required to import or delete a draft</div>}
                     <div className="draft-container">
                         {drafts.length > 0 && drafts.map(draft => (
                             <DraftCard key={draft.draft_id} draft={draft} subbed={subStatus}/>

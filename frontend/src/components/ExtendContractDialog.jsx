@@ -27,6 +27,7 @@ export default function ExtendContractDialog({isOpen, title, name, onConfirm, on
                 <div className="subtitle">{title}</div>
                 <div>{name}</div>
                 <div>Current salary: ${current_salary}</div>
+                <div>Salary increase per year: ${price_hike}</div>
                 <div className="extension-form-container">
                     <div className="input-container">
                         <div className="label">Contract length</div>
@@ -42,17 +43,17 @@ export default function ExtendContractDialog({isOpen, title, name, onConfirm, on
                     <div className="salary-years">
                         <div>
                             <div className="contract-label">Salary</div>
-                            <input type="text" className="contract-info" value={`$${salary}`} disabled></input>
+                            <input type="text" className="contract-info cant-edit" value={`$${salary}`} disabled></input>
                         </div>
 
                         <div>
                             <div className="contract-label">Start year</div>
-                            <input type="text" className="contract-info" value={start_year} disabled></input>
+                            <input type="text" className="contract-info cant-edit" value={start_year} disabled></input>
                         </div>
 
                         <div>
                             <div className="contract-label">End year</div>
-                            <input type="text" className="contract-info" value={start_year + length - 1} disabled></input>
+                            <input type="text" className="contract-info cant-edit" value={start_year + length - 1} disabled></input>
                         </div>
                       
                     </div>

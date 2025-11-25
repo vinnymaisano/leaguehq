@@ -81,7 +81,7 @@ export default function DraftCard({draft, subbed}) {
                 <span>{imported ? (<span><span className={`sub-status active-sub`}></span> Imported</span>) : (<span><span className="sub-status inactive-sub"></span> Not imported</span>)}</span>
                 <span>
                     {!subbed ? (
-                        <div>Subscription required to import or delete</div>
+                        <div></div>
                     ) : (
                         loading ? (
                         <div className="spinner-container">

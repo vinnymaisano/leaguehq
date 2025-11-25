@@ -63,20 +63,19 @@ export default function Standings({selectedYear, changeYear}) {
             <div>
                 <select value={selectedYear} onChange={(e) => change_year(e.target.value)} className="standings-year">
                     {years.map(y => (
-                        <option key={y} value={y}>{y}</option>
+                       <option key={y} value={y}>{y}</option>
                     ))}
                 </select>
             </div>
                 <div className="scroll standings">
                 {divisions && divisions.map(d => (
                     <div key={d.division_number} className="division">
-                        <Card width={"100%"}>
+                        
                             {d.division_name && <span className="division-name">{d.division_name}</span>}
                             
                             {d.teams.map((t, i) => (
                                 <Team key={t.roster_id} team={t} rank={i+1}/>
                             ))}
-                        </Card>
                     </div>
                 ))}
                 </div>

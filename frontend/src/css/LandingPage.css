@@ -5,8 +5,10 @@ div.landing-content {
     flex-direction: column;
     align-items: center;
     gap: 10px;
-    padding-left: 5px;
-    padding-right: 5px;
+}
+
+div.align-right {
+    align-items: end;
 }
 
 div.landing-container {
@@ -16,21 +18,42 @@ div.landing-container {
     align-items: center;
 }
 
+div.image-container {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+img.rounded-image {
+    border-radius: 10px;
+    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.1);
+}
+
 div.landing-section-light, div.landing-section-dark {
     display: flex;
     flex-direction: column;
     gap: 10px;
     width: 100%;
-    padding-left: 20%;
-    padding-right: 20%;
+    padding-left: 200px;
+    padding-right: 200px;
     padding-top: 15px;
     padding-bottom: 15px;
 }
 
+div.landing-section-row {
+    display: flex;
+    width: 100%;
+    gap: 10px;
+}
+
+div.heading-container {
+
+}
+
 @media (max-width: 1500px) {
     div.landing-section-light, div.landing-section-dark {
-        padding-left: 0px;
-        padding-right: 0px;
+        padding-left: 10px;
+        padding-right: 10px;
     }
 }
 
@@ -49,7 +72,7 @@ div.landing-headline {
 }
 
 div.landing-subheadline {
-    font-weight: 800;
+    font-weight: 400;
     font-size: 18px;
 }
 
@@ -66,9 +89,6 @@ div.landing-mainpanel {
 div.landing-subheading {
     font-weight: 600;
     font-size: 32px;
-}
-
-div.landing-test {
 }
 
 img.landing-roster-image {
