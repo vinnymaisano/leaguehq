@@ -9,7 +9,8 @@ export default function SettingCard({children, icon: Icon, to}) {
 
     return (
         <Link to={to}>
-            <Card width={width} padding={"5px"} height={"50px"} changeOnHover={true}>
+            {/* <Card width={width} padding={"5px"} height={"50px"} changeOnHover={true}> */}
+            <div className="setting-card">
                     <div className="space-between">
                         <div className="horizontal-flex">
                             {Icon && (
@@ -25,7 +26,7 @@ export default function SettingCard({children, icon: Icon, to}) {
                             <FaAngleRight/>
                         </div>
                     </div>
-            </Card>
+            </div>
         </Link>
     )
 }

@@ -39,7 +39,7 @@ export default function Sidebar() {
     return (
       <Card width={"100%"} height={"100%"}>
         <div className="sidebar-space">
-          <div>
+          <div className="sidebar-button-container">
             <Logo />
             <Button icon={FaThLarge} href={`/league/${league_id}`} active={location.pathname === `/league/${league_id}`} disabled={!subStatus}>Dashboard</Button>
             <Button icon={FaListUl} href={`/league/${league_id}/rosters`} active={location.pathname.includes("rosters")} disabled={!subStatus}>Rosters</Button>

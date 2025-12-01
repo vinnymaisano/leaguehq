@@ -1,3 +1,30 @@
+div.setting-card {
+    width: 750px;
+    height: 50px;
+    overflow-x: auto;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    background: rgba(255, 255, 255, 0);
+    border-radius: 10px;
+    box-shadow: 2px 2px 15px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(0px); /* the glass effect */
+    -webkit-backdrop-filter: blur(10px); /* for Safari */
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    padding: 10px;
+    animation: fade_in 0.15s ease-out forwards;
+    transition: background-color 0.1s linear;
+    color: black;
+}
+
+.setting-card:hover {
+  cursor: pointer;
+  background-color: rgba(0, 0, 0, 0.03);
+  /* background: rgba(205, 218, 240, 0.2); */
+  transition: background-color 0.1s linear;
+}
+
 .setting-icon {
     width: 17px;
     height: 17px;

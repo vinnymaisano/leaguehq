@@ -4,6 +4,12 @@ div.sidebar-container {
     height: 100%;
 }
 
+div.sidebar-button-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
 div.sidebar-bottom {
     width: 100%;
     border: 1px solid black;
@@ -14,7 +20,7 @@ div.sidebar-space {
     height: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: space-between
+    justify-content: space-between;
 }
 
 span.sidebar-username {

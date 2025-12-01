@@ -13,27 +13,23 @@
     width: 100%;    
     min-height: 35px;
     padding-left: 10px;
-    margin-bottom: 10px;
-    border-radius: 12px;
-    background: rgba(255, 255, 255, 0.1); /* semi-transparent */
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-    backdrop-filter: blur(10px); /* the glass effect */
-    -webkit-backdrop-filter: blur(10px); /* for Safari */
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    color: rgb(70, 70, 70);
-    transition: background-color 0.05s ease;
+    border-radius: 8px;
+    background: transparent;
+    transition: background-color 0.08s ease;
+    transition: box-shadow 0.08s ease;
     animation: slide_in 0.1s ease-out forwards;
     color: black;
 }
 
-.active-route {
-    border: 1px solid rgba(205, 218, 240, 0.4);
-}
+/* .active-route {
+    border: 1px solid rgba(205, 218, 240, 0.1);
+} */
 
 .button:hover, .active-route {
     cursor: pointer;
     /* background: rgba(234, 243, 255, 0.5); */
     background: rgba(205, 218, 240, 0.1);
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
 }
 
 .icon {
