@@ -25,11 +25,15 @@
     border: 1px solid rgba(205, 218, 240, 0.1);
 } */
 
-.button:hover, .active-route {
+.active-route {
     cursor: pointer;
     /* background: rgba(234, 243, 255, 0.5); */
-    background: rgba(205, 218, 240, 0.1);
+    /* background: rgba(205, 218, 240, 0.3); */
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+.inactive-route:hover {
+    background-color: rgba(0, 0, 0, 0.03);
 }
 
 .icon {

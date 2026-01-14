@@ -17,7 +17,7 @@ const JWT_SECRET = process.env.JWT_SECRET || ''
 export async function register(req, res) {
     const session = await mongoose.startSession()
     // get login info
-    let {username, email, password} = req.body
+    let {username, email, password, verify_password} = req.body
     username = username.trim()
     email = email.trim()
     password = password.trim()
@@ -34,9 +34,10 @@ export async function register(req, res) {
     }
 
     if (!password) {
-        res.status(400).json({error: "No password prvoided"})
+        res.status(400).json({error: "No password provided"})
         return
     }
+
     // if (password.length < 8) {
     //     res.status(400).json({success: false, message: "Password must be at least 8 characters."})
     //     return
@@ -50,6 +51,11 @@ export async function register(req, res) {
     //     res.status(400).json({success: false, message: "Password must contain a special character."})
     //     return
     // }
+
+    if (password !== verify_password) {
+        res.status(400).json({error: "Password do not match"})
+        return
+    }
 
     try {
         // check if username or email already in use

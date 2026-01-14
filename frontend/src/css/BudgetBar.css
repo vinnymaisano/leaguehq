@@ -22,7 +22,6 @@ div.budgetbar {
 div.budget-used, div.budget-free {
     border-radius: 3px;
     height: 100%;
-    transition: background-color 0.7s linear;
 }
 
 div.budget-used {

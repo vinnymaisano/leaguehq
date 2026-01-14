@@ -52,6 +52,7 @@ export function AuthProvider({ children }) {
     async function register(formData) {
         try {
             setLoadingOperation(true)
+            console.log(formData)
             const res = await axios.post("/auth/register", formData, {
                 withCredentials: true
             })

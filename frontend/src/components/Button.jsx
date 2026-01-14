@@ -2,7 +2,7 @@ import {Link} from "react-router-dom"
 import '../css/Button.css'
 
 export default function Button({children, href, icon: Icon, active, disabled}) {
-    const classname = active ? "button active-route" : "button"
+    const classname = active ? "button active-route" : "button inactive-route"
 
     if (disabled) {
       return (

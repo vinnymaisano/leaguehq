@@ -15,6 +15,7 @@ export default function SubscriptionPage() {
     const {league, leagueYear, loadingLeague, subStatus, subHistory} = useLeague()
     const [currentSeason, setCurrentSeason] = useState(0)
     const [loading, setLoading] = useState(false)
+    const new_year = new Date().getFullYear() > leagueYear
 
     const date_format = {
         year: "numeric",

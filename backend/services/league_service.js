@@ -31,15 +31,15 @@ export async function fetch_league(league_id) {
         throw err
     }
 
-    const current_year = new Date().getFullYear().toString()
-    const current_league_id = league.sleeper_league_ids.get(current_year) ?? null
+    const current_year = Math.max(...league.sleeper_league_ids.keys())
+    const current_league_id = league.sleeper_league_ids.get(String(current_year)) ?? null
 
     let name
     if (current_league_id) {
         const sleeper_league = await axios.get(`https://api.sleeper.app/v1/league/${current_league_id}`)
         name = sleeper_league.data.name || "No name"
     }
-    
+
     const league_obj = league.toObject()
     league_obj.name = name
     league_obj.sleeper_league_ids = Object.fromEntries(league.sleeper_league_ids)
@@ -58,11 +58,10 @@ export async function fetch_multiple_leagues(league_ids) {
         err.status_code = 404
         throw err
     }
-    const current_year = new Date().getFullYear().toString()
 
     await Promise.all(
         leagues.map(async (league) => {
-            const sleeper_league_id = league.sleeper_league_ids[current_year]
+            const sleeper_league_id = league.sleeper_league_ids[Math.max(...Object.keys(league.sleeper_league_ids))]
             if (sleeper_league_id) {
                 try {
                     const sleeperRes = await axios.get(`https://api.sleeper.app/v1/league/${sleeper_league_id}`);

@@ -36,13 +36,15 @@ export default function RegisterPage() {
 
     async function submit_form() {
         setLoading(true)
-        if (formData.password !== formData.verify_password) {
-            setErrorMessage("Passwords do not match")
-            return
-        }
+        // if (formData.password !== formData.verify_password) {
+        //     setErrorMessage("Passwords do not match")
+        //     setLoading(false)
+        //     return
+        // }
 
         // create account
         const res = await register(formData)
+        console.log("res:", res)
 
         if (res.success) {
             setErrorMessage("")
@@ -51,7 +53,7 @@ export default function RegisterPage() {
         } else {
             setErrorMessage(res.error)
             console.error("Register failed: ", res.error)
-        } 
+        }
         setLoading(false)
     }
 

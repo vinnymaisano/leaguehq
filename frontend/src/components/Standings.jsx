@@ -60,13 +60,14 @@ export default function Standings({selectedYear, changeYear}) {
     return (
         <>
             <div className="standings">
-            <div>
-                <select value={selectedYear} onChange={(e) => change_year(e.target.value)} className="standings-year">
-                    {years.map(y => (
-                       <option key={y} value={y}>{y}</option>
-                    ))}
-                </select>
-            </div>
+                <div>
+                    <select value={selectedYear} onChange={(e) => change_year(e.target.value)} className="standings-year">
+                        {years.map(y => (
+                        <option key={y} value={y}>{y}</option>
+                        ))}
+                    </select>
+                </div>
+
                 <div className="scroll standings">
                 {divisions && divisions.map(d => (
                     <div key={d.division_number} className="division">
