@@ -15,7 +15,7 @@ import CreateLeague from './pages/CreateLeague'
 import LeagueSetup from './pages/LeagueSetup'
 import RostersPage from './pages/RostersPage'
 import ContractsPage from './pages/ContractsPage'
-import LeagueSettingsPage from './pages/LeagueSettingsPage'
+import SettingsLayout from './components/SettingsLayout'
 import CommissionerSettings from './pages/CommissionerSettings'
 import ImportDraftPage from './pages/ImportDraftPage'
 import LeagueMembersPage from './pages/LeagueMembersPage'
@@ -25,7 +25,7 @@ import ResetPasswordPage from './pages/ResetPasswordPage'
 import SubscriptionPage from './pages/SubscriptionPage'
 import {AuthProvider} from './contexts/AuthContext'
 import {LeagueProvider}  from './contexts/LeagueContext'
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import TradeCenter from './pages/TradeCenter'
 import PurchaseSubscriptionPage from './pages/PurchaseSubscriptionPage'
 import RequireSubscription from './components/RequireSubscription'
@@ -83,10 +83,10 @@ function App() {
             {/* League settings */}
             <Route path="settings" element={
               <ProtectedRoute>
-                <Outlet />
+                <SettingsLayout />
               </ProtectedRoute>
             }>
-              <Route index element={<LeagueSettingsPage />}/>
+              <Route index element={<Navigate to="league-rules" replace />}/>
               <Route path="league-rules" element={<LeagueRulesPage/>} />
               <Route path="import-draft" element={<ImportDraftPage />} />
               <Route path="members" element={<LeagueMembersPage />} />

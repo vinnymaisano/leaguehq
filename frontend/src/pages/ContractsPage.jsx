@@ -93,19 +93,17 @@ export default function ContractsPage() {
     useEffect(() => {
         const get_player_data = async() => {
             if (!league) return
-            // console.log("sleeper league id: ", sleeperLeagueID)
             try {
                 const sleeper_league_id = latest_sleeper_league()
                 if (!sleeper_league_id) return
                 setLoading(true)
                 // call sleeper api to get rosters (list of player ids for each team)
                 const roster_res = await axios.get(`https://api.sleeper.app/v1/league/${sleeper_league_id}/rosters`)
-                // console.log(roster_res.data)
                 // flatten out into one giant list of player ids
                 const all_player_ids = roster_res.data.flatMap(team => team.players || [])
                 // get names, teams, positions, contract info for all of these payers
                 const response = await axios.post(
-                    `/api/${league_id}/player-info`,
+                    `/api/leagues/${league_id}/player-info`,
                     all_player_ids
                 )
                 // sort by salary
@@ -184,50 +182,56 @@ export default function ContractsPage() {
     return (
         <MainPanel>
             <Row height={"100%"} center={true}>
-                <Card height={"100%"}>
-                    <div className="subtitle">Contracts</div>
-                    <ContractHeading position={position} setPosition={set_position} max_year={max_year}/>
-                    
-                    <div className="searchbar">
-                        <input value={query} onChange={(e) => change_query(e.target.value)} className="search-player" type="text" placeholder="Search"/>                
-                    </div>
-                    
-                    <div className="scroll">
-                    {!loading && filteredPlayers.length === 0 && (
-                        <div>No contracts found.</div>
-                    )}
+                <Card height={"100%"} maxWidth={"1080px"}>
+                    <div className="space-between">
+                        <div className="subtitle">Contracts</div>
 
-                    {position == "FA" && (
-                        <div>These players must be either extended (if eligible) or dropped after this season.</div>
-                    )}
-
-                        <div className="roster-scroll">
-                            {filteredPlayers && filteredPlayers.map(player => {
-
-                                if (searchRegex.test(sanitizePlayerName(player.full_name))) {
-                                    return (
-                                        <RosterSpot
-                                            key={player._id}
-                                            player_id={player._id}
-                                            position={player.position}
-                                            team={player.team}
-                                            name={player.full_name}
-                                            age={compute_age(player.birth_date)}
-                                            salary={get_salary_array(player.contracts)}
-                                            num_years={max_year - (new Date().getFullYear())+1}
-                                            extension={player.contracts.length > 0 && player.contracts[player.contracts.length-1].extension_eligible}
-                                            subscription={subStatus}
-                                            can_edit={subPurchased && (isOwner || isCommish)}
-                                            contract_type={player.contracts.length > 0 && player.contracts[player.contracts.length-1].contract_type}
-                                            contracts={player.contracts}
-                                        
-                                        />
-                                    )
-                                }
-
-                            })}
+                        <div className="searchbar">
+                            <input value={query} onChange={(e) => change_query(e.target.value)} className="search-player" type="text" placeholder="Search"/>
                         </div>
+                    </div>
 
+                    <div className="table-card">
+                        <ContractHeading position={position} setPosition={set_position} max_year={max_year}/>
+
+                        <div className="scroll">
+                        {!loading && filteredPlayers.length === 0 && (
+                            <div className="table-empty">No contracts found.</div>
+                        )}
+
+                        {position == "FA" && (
+                            <div className="table-empty">These players must be either extended (if eligible) or dropped after this season.</div>
+                        )}
+
+                            <div className="roster-scroll">
+                                {filteredPlayers && filteredPlayers.map(player => {
+
+                                    if (searchRegex.test(sanitizePlayerName(player.full_name))) {
+                                        return (
+                                            <RosterSpot
+                                                key={player._id}
+                                                player_id={player._id}
+                                                position={player.position}
+                                                team={player.team}
+                                                name={player.full_name}
+                                                age={compute_age(player.birth_date)}
+                                                salary={get_salary_array(player.contracts)}
+                                                num_years={max_year - (new Date().getFullYear())+1}
+                                                extension={player.contracts.length > 0 && player.contracts[player.contracts.length-1].extension_eligible}
+                                                subscription={subStatus}
+                                                subscribed={subPurchased}
+                                                can_edit={isOwner || isCommish}
+                                                contract_type={player.contracts.length > 0 && player.contracts[player.contracts.length-1].contract_type}
+                                                contracts={player.contracts}
+
+                                            />
+                                        )
+                                    }
+
+                                })}
+                            </div>
+
+                        </div>
                     </div>
                     {loading && (
                         <div className="spinner-container">

@@ -1,27 +1,24 @@
-import Card from '../components/Card'
-import Button from '../components/Button'
 import '../css/HomePage.css'
-import { Outlet, useLocation } from 'react-router-dom'
+import { Outlet } from 'react-router-dom'
+import Tabs from '../components/Tabs'
 
 export default function HomePage() {
-    const location = useLocation()
+    const tabs = [
+        { label: "My leagues", to: "/home", end: true },
+        { label: "Create league", to: "/home/create" },
+        { label: "Invitations", to: "/home/invitations", disabled: true },
+        { label: "Account", to: "/home/account" },
+        { label: "Purchases", to: "/home/purchases" },
+    ]
 
     return (
         <div className="homepage-container">
-            <Card width={"200px"}>
-                <div className="sidebar-button-container">
-                    <div className="subtitle">Home</div>
-                    <Button href={"/home"} active={location.pathname=="/home"}>My leagues</Button>
-                    <Button href={"/home/create"} active={location.pathname=="/home/create"}>Create league</Button>
-                    <Button>Invitations</Button>
-                    <Button href={"/home/account"} active={location.pathname=="/home/account"}>Account</Button>
-                    <Button href={"/home/purchases"} active={location.pathname=="/home/purchases"}>Purchases</Button>
-                </div>
-            </Card>
-            <Card width={"750px"}>
+            <div className="homepage-tabs">
+                <Tabs tabs={tabs} />
+            </div>
+            <div className="homepage-content">
                 <Outlet />
-            </Card>
+            </div>
         </div>
     )
-
 }

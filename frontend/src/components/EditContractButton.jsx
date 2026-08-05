@@ -1,23 +1,24 @@
-import { FaEdit } from "react-icons/fa"
+import { LuPencil } from "react-icons/lu"
 import { useState } from "react"
 import EditContractDialog from "./EditContractDialog"
+import SubscriptionRequiredDialog from "./SubscriptionRequiredDialog"
 import axios from "axios"
 import { useParams } from "react-router-dom"
 
-export default function EditContractButton({contracts, name, player_id}) {
+export default function EditContractButton({contracts, name, player_id, subscribed}) {
     const [showDialog, setShowDialog] = useState(false)
+    const [showSubMessage, setShowSubMessage] = useState(false)
     const {league_id} = useParams()
 
     async function edit_contracts(new_contracts) {
         if (contracts.length > 0) {
             try {
                 const res = await axios.post(
-                    `/api/${league_id}/contracts/edit`,
+                    `/api/leagues/${league_id}/contracts/edit`,
                     {new_contracts},
                     {withCredentials: true}
                 )
                 setShowDialog(false)
-                // console.log("changes:", res.data.changes)
                 if (res.data.changes) window.location.reload()
             } catch (err) {
                 console.error("Error updating contracts: ", err.response.data.message)
@@ -65,11 +66,17 @@ export default function EditContractButton({contracts, name, player_id}) {
 
     return (
         <>
-        <div onClick={() => setShowDialog(true)}>
-            <FaEdit className="extend-button"/>
+        <div onClick={() => subscribed ? setShowDialog(true) : setShowSubMessage(true)}>
+            <LuPencil className="extend-button"/>
         </div>
 
-        <EditContractDialog 
+        <SubscriptionRequiredDialog
+            isOpen={showSubMessage}
+            onClose={() => setShowSubMessage(false)}
+            action="Editing a contract"
+        />
+
+        <EditContractDialog
             isOpen={showDialog}
             onCancel={() => setShowDialog(false)}
             onConfirm={contracts.length === 0 ? create_contract : edit_contracts}

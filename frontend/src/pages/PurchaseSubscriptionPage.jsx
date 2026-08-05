@@ -2,8 +2,8 @@ import Card from "../components/Card"
 import Row from "../components/Row"
 import HeaderButton from "../components/HeaderButton"
 import Spinner from "../components/Spinner"
+import BackButton from "../components/BackButton"
 import { Link, useParams } from "react-router-dom"
-import { FaAngleLeft } from "react-icons/fa"
 import { useAuth } from "../contexts/AuthContext"
 import {useLeague} from "../contexts/LeagueContext"
 import { useEffect, useState } from "react"
@@ -80,11 +80,11 @@ export default function PurchaseSubscriptionPage() {
         <>
         <div className="mainpanel">
             <Row center={true} height={"100%"}>
-                <Card width={"750px"}>
+                <Card>
                     <div className="content-gap">
 
                         <div className="header-backbutton">
-                            <BackButton to={`/league/${league_id}/settings`} />
+                            <BackButton to={`/league/${league_id}/settings/subscription`} />
                             <span className="subtitle">Purchase subscription</span>
                         </div>
 

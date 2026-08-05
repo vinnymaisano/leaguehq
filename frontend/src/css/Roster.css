@@ -1,54 +1,75 @@
 div.roster {
-    min-height: 100%;
+  min-height: 100%;
+  width: 100%;
 }
 
 div.scroll {
-    max-height: 100%;
-    min-width: 100%;
-    overflow-y: auto;
-    overflow-x: auto;
-    margin-top: 5px;
+  max-height: 100%;
+  min-width: 100%;
+  overflow-y: auto;
+  overflow-x: auto;
+  margin-top: var(--space-2);
+}
+
+/* rows sit flush under the shaded header inside a contained table */
+.table-card .scroll {
+  margin-top: 0;
+}
+
+/* Header + rows share a single horizontal scroll region so the year
+   columns stay aligned with the salaries when scrolling right. Vertical
+   scrolling happens here too, with the header pinned via position: sticky. */
+.roster-table-scroll {
+  max-height: 100%;
+  overflow: auto;
+}
+/* Sized to the widest row so it defines the full scroll width. The header and
+   rows then fill this width (via their min-width: 100%), so the header's shaded
+   background and the row borders extend all the way to the end when scrolled. */
+.roster-inner {
+  min-width: max-content;
+}
+.roster-table-scroll .scroll {
+  max-height: none;
+  overflow-x: visible;
+  overflow-y: visible;
 }
 
 div.roster-scroll {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
+  display: flex;
+  flex-direction: column;
 }
 
 div.scroll-x {
-    height: 100%;
-    width: 100%;
-    overflow-x: auto;
+  height: 100%;
+  width: 100%;
+  overflow-x: auto;
 }
 
-/* div.searchbar {
-    display: flex;
-    align-items: center;
-    width: 400px;
-    height: 40px;
-    margin-bottom: 5px;
-    border-radius: 10px;
-    border: 1px solid #ffffff4d;
-    transition: width 1s linear;
-    background-color: rgba(205, 218, 240, 0.2);
-} */
-
 div.searchbar {
-    width: 400px;
-    height: 45px;
-    padding-left: 5px;
+  margin-bottom: 10px;
+  width: 100%;
+  max-width: 360px;
+  height: 32px;
 }
 
 input.search-player {
-    width: 100%;
-    height: 100%;
-    background-color: rgba(255, 255, 255, 1);
-    box-shadow: 2px 5px 10px rgba(0, 0, 0, 0.01);
-    padding-left: 10px;
-    border-radius: 5px;
+  width: 100%;
+  height: 100%;
+  background-color: var(--color-canvas-default);
+  border: 1px solid var(--color-border-default);
+  padding: 0 var(--space-3);
+  border-radius: var(--radius-md);
+  color: var(--color-fg-default);
+  transition: border-color 0.08s ease, box-shadow 0.08s ease;
+}
+
+input.search-player::placeholder {
+  color: var(--color-fg-subtle);
 }
 
 input.search-player:focus {
-    outline: 1px solid rgba(180, 180, 180, 0.7);;
+  outline: none;
+  border-color: var(--color-accent-emphasis);
+  box-shadow: 0 0 0 2px var(--color-accent-subtle);
 }

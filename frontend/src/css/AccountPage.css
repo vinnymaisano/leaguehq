@@ -1,38 +1,43 @@
 input.user-info {
-    height: 30px;
-    padding-left: 10px;
-    border: 1px solid rgb(185, 185, 185);
-    background-color: rgba(255, 255, 255, 0.3);
-    border-radius: 5px;
+  height: 32px;
+  padding: 0 var(--space-3);
+  border: 1px solid var(--color-border-default);
+  background-color: var(--color-canvas-default);
+  color: var(--color-fg-default);
+  border-radius: var(--radius-md);
+}
+input.user-info:focus {
+  outline: none;
+  border-color: var(--color-accent-emphasis);
+  box-shadow: 0 0 0 2px var(--color-accent-subtle);
 }
 
 div.center {
-    height: 100%;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 span.link {
-    color: black;
-    text-decoration: underline;
-    cursor: pointer;
+  color: var(--color-fg-default);
+  text-decoration: underline;
+  cursor: pointer;
 }
-
 span.link:hover {
-    color: rgb(95, 95, 95);
+  color: var(--color-fg-muted);
 }
 
 div.dialog-input-container {
-    width: 100%;
+  width: 100%;
 }
 input.dialog-password {
-    width: 100%;
+  width: 100%;
 }
 
 span.note {
-    font-size: 14px;
-    font-weight: 600;
-    color: black;
+  font-size: var(--text-base);
+  font-weight: var(--fw-semibold);
+  color: var(--color-fg-default);
 }

@@ -1,64 +1,49 @@
 div.sub-status-container {
-    display: flex;
-    align-items: center;
-    gap: 5px;
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
 }
 
-span.sub-status {
-    display: inline-block;
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-}
+/* .sub-status dot + status colors now live in theme.css (shared with LeagueCard) */
 
-span.active-sub {
-    background-color: rgb(78, 156, 92);
-}
-
-span.free-trial {
-    background-color: rgb(255, 199, 29);
-}
-
-span.inactive-sub {
-    /* background-color: rgb(255, 80, 80); */
-    background-color: rgb(115, 115, 115);
-}
 div.subscribe-button-container {
-    display: flex;
-    justify-content: center;
+  display: flex;
+  justify-content: center;
 }
+
 div.subscribe-button {
-    display: flex;
-    background-color: rgba(255, 255, 255, 0.5);
-    border: 1px solid rgba(163, 187, 211, 0.2);
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-    height: 40px;
-    padding-left: 10px;
-    padding-right: 10px;
-    font-weight: 600;
-    border-radius: 100px;
-    box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.05);
-    overflow: hidden;
+  display: flex;
+  background-color: var(--color-btn-primary-bg);
+  border: 1px solid var(--color-btn-primary-bg);
+  color: var(--color-btn-primary-fg);
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  height: 36px;
+  padding: 0 var(--space-4);
+  font-weight: var(--fw-medium);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  transition: background-color 0.08s ease, border-color 0.08s ease;
 }
 
 div.subscribe-button:hover {
-    background-color: rgba(240, 240, 240, 0.5)
+  background-color: var(--color-btn-primary-bg-hover);
+  border-color: var(--color-btn-primary-bg-hover);
 }
 
 div.text-gap {
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
 }
 
 div.sleeper-leagues {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
 }
 
 span.error {
-    color: rgb(105, 0, 0);
+  color: var(--color-danger-fg);
 }

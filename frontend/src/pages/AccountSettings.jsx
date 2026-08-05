@@ -1,4 +1,5 @@
 import HeaderButton from "../components/HeaderButton"
+import Card from "../components/Card"
 import {useAuth} from "../contexts/AuthContext"
 import { useState, useEffect } from "react"
 import "../css/AccountPage.css"
@@ -65,9 +66,7 @@ export default function AccountSettingsPage() {
                 },
                 {withCredentials: true}
             )
-            // console.log("response:", res.data)
             refresh_user()
-            // console.log("response:", res.data)
             if (res.data.email_changed) {
                 alert(`Your email has been changed. An link has been sent to ${email} to verify your account.`)
                 window.location.reload()
@@ -104,9 +103,9 @@ export default function AccountSettingsPage() {
     }
 
     return (
-        <>      
-        <div className="subtitle">Account</div>
-        <div className="center">
+        <Card table maxWidth={"560px"}>
+        <div className="table-card-head table-head-title">Account</div>
+        <div className="table-body">
                 <div className="form-container">
                     <div className="input-container">
                         <div className="label">
@@ -151,6 +150,6 @@ export default function AccountSettingsPage() {
 
                 </div>
         </div>
-    </>
+    </Card>
     )
 }

@@ -28,20 +28,22 @@ export default function ForgotPasswordPage() {
     }
 
     return (
-        <Row height={"100%"}>
-            <Card width={"600px"} height={""} padding={"30px"}>
-                <div className="title">Reset password</div>  
+        <Row height={"100%"} center={true}>
+            <Card table maxWidth={"420px"}>
+                <div className="table-card-head table-head-title">Reset password</div>
+                <div className="login-body">
                 <div className="form-container">
                     <div className="input-container">
                         <div className="label">Enter email:</div>
                         <input type="text" className="text-input" value={email} onChange={(e) => setEmail(e.target.value)}></input>
-                    </div>   
+                    </div>
                     <div className="submit-container">
                         <HeaderButton onClick={submit}>Reset</HeaderButton>
                         {loading && (
                             <Spinner size={"40px"}></Spinner>
                         )}
                     </div>
+                </div>
                 </div>
             </Card>
         </Row>

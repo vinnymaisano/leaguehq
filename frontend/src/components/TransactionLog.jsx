@@ -78,7 +78,7 @@ export default function TransactionLog({year}) {
     async function fetch_drafts() {
         try {
             setLoading(true)
-            const url = `/api/${league_id}/drafts`
+            const url = `/api/leagues/${league_id}/drafts`
             const res = await axios.get(url)
             setDrafts(res.data)
         } catch (err) {
@@ -113,6 +113,7 @@ export default function TransactionLog({year}) {
     return (
         <div className="log-container" ref={logContainerRef}>
 
+            <div className="txns-scroll">
             {transactions.length && drafts && teamInfo && rosterMap && transactions.map(t => {
                 if (t.type === "draft_import" || t.type === "draft_delete") {
                     return <TransactionCard txn={t} teams={teamInfo} roster_map={rosterMap} draft={drafts.find(d => d.draft_id === t.draft_id)}/>
@@ -130,6 +131,7 @@ export default function TransactionLog({year}) {
                 ) : (
                     <div>No more transactions.</div>
                 )}
+            </div>
             </div>
 
         </div>

@@ -1,7 +1,6 @@
-import Card from "./Card"
 import Spinner from "./Spinner"
 import "../css/LeagueMember.css"
-import { FaRegTimesCircle } from "react-icons/fa"
+import { LuCircleX } from "react-icons/lu"
 import axios from "axios"
 import { useParams } from "react-router-dom"
 import { useState } from "react"
@@ -30,36 +29,45 @@ export default function LeagueMember({can_delete, user_id, username, teams, on_c
     }
 
     return (
-        <Card width={"100%"}>
-            <div className="league-member-grid">
+            <div className="league-member-grid league-member-row">
 
                 <span className="username-container">{username}</span>
 
                 <div className="team-dropdown-container">
-                    {owner && <span className="league-role">Owner</span>}
-
-                        <select 
-                            className="team-dropdown"
-                            value={selected_roster_id || ""}
-                            onChange={on_change_team}
-                        >
-                            <option value="">Unassigned</option>
-                            {teams && teams.map(team => (
-                                <option key={team.roster_id} value={team.roster_id}>
-                                    {team.name}
-                                </option>
-                            ))}
-                        </select>
+                    <select
+                        className="team-dropdown"
+                        value={selected_roster_id || ""}
+                        onChange={on_change_team}
+                    >
+                        <option value="">Unassigned</option>
+                        {teams && teams.map(team => (
+                            <option key={team.roster_id} value={team.roster_id}>
+                                {team.name}
+                            </option>
+                        ))}
+                    </select>
                 </div>
 
-                <div className="commish-toggle">
-                    {!owner &&  <input checked={commish} onChange={on_change_commish} type="checkbox" disabled={!can_edit_commish}></input>}
+                <div className="commish-cell">
+                    {owner ? (
+                        <span className="league-role">Owner</span>
+                    ) : (
+                        <label className={`switch ${can_edit_commish ? "" : "disabled"}`}>
+                            <input
+                                type="checkbox"
+                                checked={commish}
+                                onChange={on_change_commish}
+                                disabled={!can_edit_commish}
+                            />
+                            <span className="switch-slider"></span>
+                        </label>
+                    )}
                 </div>
 
                 <div className="delete-button-container">
                 {!loading ? (
                     can_delete ? (
-                        <FaRegTimesCircle onClick={() => setShowDialog(true)} className="delete-button" />
+                        <LuCircleX onClick={() => setShowDialog(true)} className="delete-button" />
                     ) : (
                         <></>
                     )) : (
@@ -77,6 +85,5 @@ export default function LeagueMember({can_delete, user_id, username, teams, on_c
                     message={`Are you sure you want to remove ${username}?`}
                 />
             </div>
-        </Card>
     )
 }

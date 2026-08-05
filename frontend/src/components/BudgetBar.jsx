@@ -1,6 +1,5 @@
 import "../css/BudgetBar.css"
 import { useState, useEffect } from "react"
-import Card from "./Card"
 
 export default function BudgetBar({children, used, total, year}) {
     const [animatedWidth, setAnimatedWidth] = useState(0)
@@ -30,23 +29,24 @@ export default function BudgetBar({children, used, total, year}) {
     }, [percentage])
 
     return (
-        <Card width={"100%"} padding={"15px"} borderRadius={"20px"}>
+        <div className="budget-row">
             <div className="year">{year}</div>
-            <div style={{backgroundColor: used_color}} className="budgetbar">
+            <div className="budgetbar">
 
                 <div style={{
                     width: `${animatedWidth}%`,
-                    borderRadius: (portion >= 1) ? "3px" : ""
+                    borderRadius: (portion >= 1) ? "3px" : "",
+                    backgroundColor: used_color 
                     }} className="budget-used" />
 
                 <div style={{
                     width: `${100-percentage}%`,
                     }} className="budget-free" />
             </div>
-            <div className="space-between-budget" style={{color: over_budget ? "rgb(105, 0, 0)" : "black", fontWeight: over_budget ? "600" : "400"}}>
+            <div className="space-between-budget" style={{color: over_budget ? "var(--color-danger-fg)" : "var(--color-fg-muted)", fontWeight: over_budget ? "600" : "400"}}>
                 <div>{`$${used} / $${total}`}</div>
                 <div>{`Available: $${total - used}`}</div>
             </div>
-        </Card>
+        </div>
     )
 }

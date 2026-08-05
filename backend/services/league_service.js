@@ -73,6 +73,24 @@ export async function fetch_multiple_leagues(league_ids) {
             } else {
                 league.name = "Unnamed league";
             }
+
+            // subscription status for this league (DB only, no external calls):
+            // "active" = a purchased subscription is currently in its season window,
+            // "trial" = still within the free trial, "inactive" = neither.
+            const now = new Date()
+            const sleeper_ids = Object.values(league.sleeper_league_ids || {})
+            let paid_active = false
+            if (sleeper_ids.length) {
+                const subs = await Subscription.find({ sleeper_league_id: { $in: sleeper_ids } }).lean()
+                paid_active = subs.some(sub => {
+                    const season = Number(sub.season)
+                    const start = new Date(season, 0, 1)      // Jan 1 of season
+                    const end = new Date(season + 1, 2, 1)    // Mar 1 of next year
+                    return now >= start && now < end
+                })
+            }
+            const trial_active = league.free_trial_end ? now < new Date(league.free_trial_end) : false
+            league.subscription_status = paid_active ? "active" : (trial_active ? "trial" : "inactive")
         })
     )
     return leagues
@@ -239,7 +257,7 @@ export async function import_contracts(league_id, user_id, draft_id, overwrite =
 
     // get all the drafts for this league
     const drafts = await safe_api_get(
-        `http://localhost:5000/api/${league_id}/drafts`,
+        `http://localhost:5000/api/leagues/${league_id}/drafts`,
         "Failed to fetch draft info from DB"
     )
 
@@ -1123,6 +1141,43 @@ export async function save_league_settings(user_id, formData) {
     return result
 }
 
+// give a league a custom, league-wide name (commissioner only)
+export async function rename_league(league_id, user_id, custom_name) {
+    if (!mongoose.Types.ObjectId.isValid(league_id)) {
+        const err = new Error("Invalid league ID format")
+        err.statusCode = 400
+        throw err
+    }
+
+    const user = await User.findById(user_id)
+    if (!user) {
+        const err = new Error("User does not exist")
+        err.statusCode = 400
+        throw err
+    }
+
+    const league = await League.findById(league_id)
+    if (!league) {
+        const err = new Error("League does not exist")
+        err.statusCode = 404
+        throw err
+    }
+
+    if (!verify_commissioner(league, user)) {
+        const err = new Error("User is not the owner or a commissioner of this league.")
+        err.statusCode = 403
+        throw err
+    }
+
+    const trimmed = (custom_name || "").trim().slice(0, 60)
+    const result = await League.findByIdAndUpdate(
+        league_id,
+        {custom_name: trimmed},
+        {new: true}
+    )
+    return result.custom_name
+}
+
 export async function update_draft_rounds(league_id, user_id) {
     if (!mongoose.Types.ObjectId.isValid(league_id)) {
         const err = new Error("Invalid league ID format");
@@ -1560,6 +1615,8 @@ export async function fetch_league_sub_history(sleeper_league_id) {
         const url = `https://api.sleeper.app/v1/league/${sleeper_league_id}`
         const res = await axios.get(url)
         const league_name = res.data.name
+
+        console.log(res.data)
 
         if (!res.data) {
             const err = new Error("League does not exist on sleeper.")

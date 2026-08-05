@@ -1,8 +1,6 @@
-import Row from "../components/Row"
 import Card from "../components/Card"
 import { useEffect, useState } from "react"
 import { Link, useParams } from "react-router-dom"
-import { FaAngleLeft } from "react-icons/fa"
 import axios from "axios"
 import LeagueMember from "../components/LeagueMember"
 import HeaderButton from "../components/HeaderButton"
@@ -10,7 +8,6 @@ import Spinner from "../components/Spinner"
 import SearchUser from "../components/SearchUser"
 import { useLeague } from "../contexts/LeagueContext"
 import { useAuth } from "../contexts/AuthContext"
-import BackButton from "../components/BackButton"
 
 export default function LeagueMembersPage() {
     const {league_id} = useParams()
@@ -38,7 +35,6 @@ export default function LeagueMembersPage() {
                 setAssignments(teamRes.data.teams)
                 setUsers(userRes.data)
                 setCommissioners(league.commissioners)
-                // console.log(league.commissioners)
             } catch (err) {
                 console.error("Error fetching team data: ", err.message)
             } finally {
@@ -59,10 +55,8 @@ export default function LeagueMembersPage() {
 
     function update_commissioners(user_id) {
         if (commissioners.includes(user_id)) {
-            // console.log(commissioners.filter(id => id !== user_id))
             setCommissioners(prev => prev.filter(id => id !== user_id))
         } else {
-            // console.log([...commissioners, user_id])
             setCommissioners(prev => [...prev, user_id])
         }
     }
@@ -87,33 +81,31 @@ export default function LeagueMembersPage() {
     
     return (
         <div className="mainpanel">
-            <Row center={true} height={"100%"}>
-                <Card width={"750px"} height={"100%"}>
-                    <div className="header-backbutton">
-                        <BackButton to={`/league/${league_id}/settings`} />
-                        <span className="subtitle">League members</span>
+            <Card gap={"var(--space-4)"}>
+                <div className="members-intro">
+                    <span className="subtitle">League members</span>
+                    <div className="text-muted">
+                        Assigning a member to a team allows them to extend their players' contracts.
+                        Commissioners can change league settings and extend or edit any contract.
                     </div>
+                </div>
 
-                    <div>Assigning a user to a team allows them to extend their players' contracts</div>
-
+                <div className="table-card">
+                    <div className="table-card-head table-head-title">Members</div>
                     <div className="league-member-grid league-member-heading">
                         <span>Username</span>
-                        <span style={{paddingLeft: "100px"}}>Team</span>
-                        <span>Commissioner</span>
+                        <span style={{textAlign: "center"}}>Team</span>
+                        <span style={{textAlign: "center"}}>Commissioner</span>
+                        <span></span>
                     </div>
 
-
-                    <div className="content-gap">
-
                     {loading || loadingLeague ? (
-                        <div className="spinner-container">
+                        <div className="table-empty">
                             <Spinner />
                         </div>
-                    ) : (    
-                        <>
-                        <div className="settings-container">
-                        {users && users.map(u => (
-                            <LeagueMember 
+                    ) : (
+                        users && users.map(u => (
+                            <LeagueMember
                                 key={u._id}
                                 can_delete={isOwner && u._id != user._id}
                                 user_id={u._id}
@@ -126,28 +118,31 @@ export default function LeagueMembersPage() {
                                 owner={league.owner == u._id}
                                 commish={league.owner !== u._id && commissioners.includes(String(u._id))}
                             />
-                        ))}
-
-                        </div>
-                        <div className="save-container">
-                            {saveLoading ? (
-                                <Spinner />
-                            ) : (
-                                <HeaderButton background={true} onClick={save_changes}>Save</HeaderButton>
-                            )}
-                            <div className="error">{saveError}</div>
-                        </div>
-                        </>
+                        ))
                     )}
                 </div>
-                </Card>
-                <Card width={"500px"} height={"100%"}>
-                    <div className="header-backbutton">
-                        <span className="subtitle">Invite member</span>
+
+                {!(loading || loadingLeague) && (
+                    <div className="save-container">
+                        {saveLoading ? (
+                            <Spinner />
+                        ) : (
+                            <HeaderButton background={true} onClick={save_changes}>Save changes</HeaderButton>
+                        )}
+                        <div className="error">{saveError}</div>
                     </div>
-                    <SearchUser />
-                </Card>
-            </Row>
+                )}
+
+                <div className="table-card">
+                    <div className="table-card-head table-head-title">Invite member</div>
+                    <div className="invite-body">
+                        <div className="text-muted invite-hint">
+                            Search for a user by their username to add them to the league.
+                        </div>
+                        <SearchUser />
+                    </div>
+                </div>
+            </Card>
         </div>
     )
 }

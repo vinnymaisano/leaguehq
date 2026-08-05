@@ -19,6 +19,7 @@ console.log("dirname:", __dirname)
 
 const app = express()
 const PORT = process.env.PORT || 5000
+const HOST = "0.0.0.0"
 
 if (process.env.NODE_ENV === "development") {
     console.log("using CORS")
@@ -55,8 +56,8 @@ connectDB().then(() => {
     const stopPoller = startTransactionPoller()
 
     // start server
-    const server = app.listen(PORT, '127.0.0.1', () => {
-        console.log(`Server running on port ${PORT}`);
+    const server = app.listen(PORT, HOST, () => {
+    console.log(`Server running on http://${HOST}:${PORT}`);
         });
     // const server = app.listen(PORT, () => {
     //     console.log(`Listening on http://localhost:${PORT}`);

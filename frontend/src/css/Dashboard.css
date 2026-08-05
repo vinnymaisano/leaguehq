@@ -1,0 +1,22 @@
+/* On the fixed-height dashboard, each card body fills the remaining space and
+   scrolls internally (single scrollbar) instead of growing the page. */
+.mainpanel.dashboard .glass-card {
+  overflow: hidden;
+}
+
+.mainpanel.dashboard .glass-card > .log-container {
+  flex: 1;
+  min-height: 0;
+}
+
+.mainpanel.dashboard .glass-card > .standings {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.mainpanel.dashboard .glass-card > .standings > .scroll {
+  flex: 1;
+  min-height: 0;
+}

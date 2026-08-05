@@ -1,7 +1,7 @@
 import Card from "./Card"
 import RosterDialog from "./RosterDialog"
 import RosterHeading from "./RosterHeading"
-import { FaPlus } from "react-icons/fa"
+import { LuPlus } from "react-icons/lu"
 import { useState } from "react"
 import Roster from "./Roster"
 import { get_salary_array } from "../utils/utils"
@@ -59,36 +59,41 @@ export default function TradeRosterCard({teams, rosterID, setRosterID, otherRost
 
     return (
         <>
-        <Card height={"100%"} width={"50%"}>
-                <RosterHeading 
-                    teams={teams.filter(t => t.roster_id != otherRosterID)} 
-                    selectedRosterID={rosterID} 
-                    setSelectedRosterID={handle_set_roster_id} 
-                    max_year={max_year}
-                />
+        <Card height={"100%"} portion={1} minWidth={0} gap={"var(--space-4)"}>
+                <div className="table-card trade-table">
+                    <div className="roster-table-scroll">
+                        <div className="roster-inner">
+                            <RosterHeading
+                                teams={teams.filter(t => t.roster_id != otherRosterID)}
+                                selectedRosterID={rosterID}
+                                setSelectedRosterID={handle_set_roster_id}
+                                max_year={max_year}
+                            />
 
-                <div className="roster-container">
-
-                    <div className="trade-roster-container">
-                        <Roster
-                            selected_roster={selected_roster}
-                            can_edit={false}
-                            max_year={max_year}
-                            inDialog={false}
-                            selectedPlayerIDs={selectedPlayerIDs}
-                            setSelectedPlayerIDs={setSelectedPlayerIDs}
-                        />
-
-                        <span>
-                            <div onClick={() => setShowDialog(true)} className="add-player-button">
-                                <FaPlus/>
-                                <div>Select Players</div>
-                            </div>
-                        </span>
-
+                            <Roster
+                                selected_roster={selected_roster}
+                                can_edit={false}
+                                max_year={max_year}
+                                inDialog={false}
+                                selectedPlayerIDs={selectedPlayerIDs}
+                                setSelectedPlayerIDs={setSelectedPlayerIDs}
+                            />
+                        </div>
                     </div>
+                </div>
 
-                    <div className="cap-info-container">
+                <button type="button" onClick={() => setShowDialog(true)} className="add-player-button">
+                    <LuPlus/>
+                    <span>Select Players</span>
+                </button>
+
+                <div className="cap-table">
+                        <div className="cap-table-row cap-table-head">
+                            <span>Year</span>
+                            <span>Current</span>
+                            <span>After</span>
+                            <span>Change</span>
+                        </div>
                         {Array.from({length: max_year-current_year+2}, (_, i)=> {
                             const year = current_year+i
                             const used = cap.get(year) || 0
@@ -98,19 +103,16 @@ export default function TradeRosterCard({teams, rosterID, setRosterID, otherRost
                             const currentCapSpace = league.salary_cap - used
                             const afterCapSpace = league.salary_cap - final
                             return (
-                                <div key={year} className="cap-info">
-                                    <div className="year">{year} cap space</div>
-                                    <div>Current: <span className={currentCapSpace < 0 ? "net-negative" : ""}>{currentCapSpace < 0 ? "-" : ""}${Math.abs(currentCapSpace)}</span></div>
-                                    <div>After: <span className={afterCapSpace < 0 ? "net-negative" : ""}>{afterCapSpace < 0 ? "-" : ""}${Math.abs(afterCapSpace)}</span></div>
-                                    <div>Change: <span className={net <= 0 ? "net-positive" : "net-negative"}>{net <= 0 ? "+" : "-"}${Math.abs(net)}</span></div> 
-                                    
+                                <div key={year} className="cap-table-row">
+                                    <span className="cap-table-year">{year}</span>
+                                    <span className={currentCapSpace < 0 ? "net-negative" : ""}>{currentCapSpace < 0 ? "-" : ""}${Math.abs(currentCapSpace)}</span>
+                                    <span className={afterCapSpace < 0 ? "net-negative" : ""}>{afterCapSpace < 0 ? "-" : ""}${Math.abs(afterCapSpace)}</span>
+                                    <span className={net <= 0 ? "net-positive" : "net-negative"}>{net <= 0 ? "+" : "-"}${Math.abs(net)}</span>
                                 </div>
                             )
                             }
                         )}
                     </div>
-                    
-                </div>
             </Card>
 
             <RosterDialog 

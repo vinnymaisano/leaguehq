@@ -16,6 +16,9 @@ const LeagueSchema = new mongoose.Schema({
     default: {}
   },
 
+  // optional league-wide custom name (falls back to the Sleeper name when empty)
+  custom_name: {type: String, default: "", trim: true, maxlength: 60},
+
   // user that activates the league, purchases subscription
   owner: {type: Schema.Types.ObjectId, ref: "User", required: true},
 

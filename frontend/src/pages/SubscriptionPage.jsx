@@ -3,14 +3,13 @@ import { Link, useParams } from "react-router-dom"
 import Row from "../components/Row"
 import Card from "../components/Card"
 import SubCard from "../components/SubCard"
-import { FaAngleLeft } from "react-icons/fa"
 import { useLeague } from "../contexts/LeagueContext"
 import Spinner from "../components/Spinner"
 import { useEffect, useState } from "react"
 import "../css/SubscriptionPage.css"
-import BackButton from "../components/BackButton"
 
 export default function SubscriptionPage() {
+    console.log("sub page test")
     const {league_id} = useParams()
     const {league, leagueYear, loadingLeague, subStatus, subHistory} = useLeague()
     const [currentSeason, setCurrentSeason] = useState(0)
@@ -89,23 +88,15 @@ export default function SubscriptionPage() {
 
     return (
         <div className="mainpanel">
-            <Row center={true} height={"100%"}>
-                <Card width={"750px"} height={"100%"}>
-                    <div className="content-gap">
-                        <div>
-                            <div className="header-backbutton">
-                                <BackButton to={`/league/${league_id}/settings`} />
-                                <span className="subtitle">Subscription</span>
-                            </div>
-                        </div>
-                            
-                        <Card>
+            <Row height={"100%"}>
+                <Card gap={"var(--space-4)"}>
+                    <Card table>
+                        <div className="table-card-head table-head-title">Subscription</div>
+                        <div className="table-body">
                             <div className="league-name sub-status-container">Subscription status: <span className={`sub-status ${status_classname}`}></span>{status}</div>
                             {status == "Active" && `${latestSubscription} season subscription end date: ${(new Date(latestSubscription+1, 2, 1)).toLocaleString("en-US", date_format)}`}
                             {status == "Free trial" && `Free trial expiration: ${formatDateTime(new Date(league.free_trial_end))}`}
-                        </Card>
-                        
-                        <div className="text-gap">
+
                             {(subHistory?.length === 0 || latestSubscription < currentSeason) && (
                                 <Link to={`/league/${league_id}/settings/purchase-subscription`}>
                                 <div className="subscribe-button-container">
@@ -113,24 +104,21 @@ export default function SubscriptionPage() {
                                 </div>
                                 </Link>
                             )}
-
-                            <div className="subtitle">Subscription history</div>
-                            <div>Subscriptions are purchased by Sleeper league ID. Sleeper gives a new league ID for each year of a dynasty league.</div>
-                            
-                            {subHistory?.length ? (
-                                <div className="content-gap">
-                                    {subHistory.map(sub => (
-                                        <SubCard key={sub.sleeper_league_id} sub={sub}></SubCard>
-                                    ))}
-                                </div>
-                            ) : (
-                                <Card>
-                                    <div>No subscription history for this Sleeper league.</div>
-                                </Card>
-                            )}
-
                         </div>
-                    </div>
+                    </Card>
+
+                    <Card table>
+                        <div className="table-card-head table-head-title">Subscription history</div>
+                        <div className="table-body">Subscriptions are purchased by Sleeper league ID. Sleeper gives a new league ID for each year of a dynasty league.</div>
+
+                        {subHistory?.length ? (
+                            subHistory.map(sub => (
+                                <SubCard key={sub.sleeper_league_id} sub={sub}></SubCard>
+                            ))
+                        ) : (
+                            <div className="table-empty">No subscription history for this Sleeper league.</div>
+                        )}
+                    </Card>
                 </Card>
             </Row>
         </div>

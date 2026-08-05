@@ -70,10 +70,10 @@ export default function Standings({selectedYear, changeYear}) {
 
                 <div className="scroll standings">
                 {divisions && divisions.map(d => (
-                    <div key={d.division_number} className="division">
-                        
-                            {d.division_name && <span className="division-name">{d.division_name}</span>}
-                            
+                    <div key={d.division_number} className="division table-card">
+
+                            {d.division_name && <span className="division-name table-card-head">{d.division_name}</span>}
+
                             {d.teams.map((t, i) => (
                                 <Team key={t.roster_id} team={t} rank={i+1}/>
                             ))}

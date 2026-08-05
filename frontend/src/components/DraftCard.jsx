@@ -10,7 +10,7 @@ import ImportDialog from "./ImportDialog"
 export default function DraftCard({draft, subbed}) {
     const capitalize = str => str.charAt(0).toUpperCase() + str.slice(1);
     const complete = draft.status === "complete"
-    const color = complete ? "rgb(0, 125, 0)" : "rgb(150, 0, 0)" 
+    const color = complete ? "rgb(0, 125, 0)" : "rgb(150, 0, 0)"
     const {league_id} = useParams()
     const [loading, setLoading] = useState(false)
     const [imported, setImported] = useState(draft.imported)
@@ -23,8 +23,7 @@ export default function DraftCard({draft, subbed}) {
     async function import_draft() {
         try {
             setLoading(true)
-            const url = `/api/${league_id}/drafts/${draft.draft_id}/import`
-            // console.log(url)
+            const url = `/api/leagues/${league_id}/drafts/${draft.draft_id}/import`
             const res = await axios.get(url, {params: {overwrite}, withCredentials: true})
             alert(res.data.message)
             setImported(true)
@@ -39,7 +38,7 @@ export default function DraftCard({draft, subbed}) {
     async function delete_draft() {
         try {
             setLoading(true)
-            const res = await axios.delete(`/api/${league_id}/drafts/${draft.draft_id}/delete`)
+            const res = await axios.delete(`/api/leagues/${league_id}/drafts/${draft.draft_id}/delete`)
             alert(res.data.message)
             setImported(false)
         } catch (err) {
@@ -61,13 +60,26 @@ export default function DraftCard({draft, subbed}) {
         action()
     }
 
+    let button
+    if (!subbed) {
+        button = <div></div>
+    } else if (loading) {
+        button = <div className="spinner-container"><Spinner/></div>
+    } else if (complete) {
+        button = imported ? (
+            <HeaderButton background={false} onClick={() => setShowDelete(true)}>Delete</HeaderButton>
+        ) : (
+            <HeaderButton background={true} onClick={() => setShowImport(true)}>Import</HeaderButton>
+        )
+    }
+
     return (
         <>
         <div className="draft-card">
         <Card width={"100%"}>
             <div className="league-name">
                 {draft.rookie_draft ? (
-                    `${draft.season} rookie draft` 
+                    `${draft.season} rookie draft`
                 ) : (
                     `${draft.season} ${draft.veteran_draft ? "veteran" : ""} ${draft.type} draft`
                 )}
@@ -78,57 +90,10 @@ export default function DraftCard({draft, subbed}) {
             {draft.budget != -1 && <div>Draft budget: ${draft.budget}</div>}
             <div>Draft status: <span style={{color}}>{capitalize(draft.status.replace("_", "-"))}</span></div>
             <div className="bottom-container">
-                <span>{imported ? (<span><span className={`sub-status active-sub`}></span> Imported</span>) : (<span><span className="sub-status inactive-sub"></span> Not imported</span>)}</span>
                 <span>
-                    {!subbed ? (
-                        <div></div>
-                    ) : (
-                        loading ? (
-                        <div className="spinner-container">
-                            <Spinner/>
-                        </div>
-                        )
-                    : (complete && ( imported ? (
-                        <HeaderButton
-                            background={false}
-                            onClick={() => setShowDelete(true)}
-                        >
-                            {"Delete"}
-                        </HeaderButton> ) : (
-                            
-                        <HeaderButton
-                            background={true}
-                            onClick={() => setShowImport(true)}
-                        >
-                            {"Import"}
-                        </HeaderButton>
-                        )
-                        ))
-                    )}
-                    {/* {loading ? (
-                        <div className="spinner-container">
-                            <Spinner/>
-                        </div>
-                        )
-                    : (complete && ( imported ? (
-                        <HeaderButton
-                            background={false}
-                            onClick={() => setShowDelete(true)}
-                        >
-                            {"Delete"}
-                        </HeaderButton> ) : (
-                            
-                        <HeaderButton
-                            background={true}
-                            onClick={() => setShowImport(true)}
-                        >
-                            {"Import"}
-                        </HeaderButton>
-                        )
-                        ))
-                    } */}
-                    
+                    <span className={`sub-status ${imported ? "active-sub" : "inactive-sub"}`}></span> {imported ? "Imported" : "Not imported"}
                 </span>
+                <span>{button}</span>
             </div>
         </Card>
         </div>

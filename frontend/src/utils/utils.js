@@ -1,3 +1,8 @@
+// Preferred display name for a league: the custom name if set, else the Sleeper name.
+export function league_display_name(league) {
+    return league?.custom_name || league?.name || ""
+}
+
 export function get_salary_array(contracts) {
     if (!contracts || contracts.length === 0) return [];
     

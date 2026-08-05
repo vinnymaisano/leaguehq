@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react"
 import { useAuth } from "../contexts/AuthContext"
+import Card from "../components/Card"
 import LeagueCard from "../components/LeagueCard"
 import Spinner from "../components/Spinner"
 import axios from "axios"
@@ -29,12 +30,10 @@ export default function MyLeagues() {
     }, [])
 
     return (
-        <>
-            {/* <div className="subtitle">Welcome, {user.username}</div> */}
-            <div className="subtitle">My leagues</div>
-            <div className="search-results">
+        <Card table maxWidth={"720px"}>
+            <div className="table-card-head table-head-title">My leagues</div>
             {loading ? (
-                <Spinner />
+                <div className="table-empty"><Spinner /></div>
             ) : leagues && leagues.length > 0 ? (
                 leagues.map((league) => (
                     <LeagueCard
@@ -44,10 +43,8 @@ export default function MyLeagues() {
                     />
                 ))
                 ) : (
-                <div>No leagues found.</div>
+                <div className="table-empty">No leagues found.</div>
             )}
-
-            </div>
-        </>
+        </Card>
     )
 }

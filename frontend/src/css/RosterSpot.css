@@ -1,92 +1,79 @@
 div.roster_spot {
-    border-radius: 5px;
-    box-sizing: border-box;
-    display: grid;
-    align-items: center;
-    gap: 10px;
-    height: 50x;
-    padding-left: 10px;
-    padding-right: 10px;
-    padding-top: 5px;
-    padding-bottom: 5px;
-    animation: slide_in 0.1s ease-out forwards;
+  box-sizing: border-box;
+  display: grid;
+  align-items: center;
+  gap: var(--space-3);
+  min-height: 44px;
+  padding: var(--space-2) var(--space-3);
+  border-bottom: 1px solid var(--color-border-muted);
+  animation: slide_in 0.1s ease-out forwards;
+}
+
+div.roster_spot:last-child {
+  border-bottom: none;
 }
 
 div.selected {
-    border: 1px solid rgba(139, 180, 255, 0.4);
-    background-color: #f0f6f8;
+  background-color: var(--color-canvas-subtle);
+  box-shadow: inset 2px 0 0 var(--color-accent-emphasis);
 }
 
 div.selectable:hover {
-    cursor: pointer;
+  cursor: pointer;
+  background-color: var(--color-canvas-subtle);
 }
 
 div.roster_spot > span {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 }
 
-span.name, span.info, span.stats {
-    color: rgb(10, 10, 10);
+span.name {
+  color: var(--color-fg-default);
+  /* font-weight: var(--fw-medium); */
+}
+
+span.info,
+span.stats {
+  color: var(--color-fg-default);
+  font-variant-numeric: tabular-nums;
 }
 
 @keyframes slide_in {
-    from {
-      transform: translateX(5px);
-    }
-    to {
-      transform: translateX(0);
-    }
-  }
+  from { transform: translateX(4px); }
+  to   { transform: translateX(0); }
+}
 
 span.position {
-    box-sizing: border-box;
-    justify-content: center;
-    border-radius: 8px;
-    width: 100%;    
-    color: rgb(250, 250, 250);
-    padding: 5px;
-    padding-bottom: 7px;
-    padding-top: 7px;
-    font-weight: 600;
-    font-size: 14px;
+  box-sizing: border-box;
+  justify-content: center;
+  border-radius: var(--radius-sm);
+  width: 100%;
+  color: #ffffff;
+  padding: var(--space-1) var(--space-2);
+  font-weight: var(--fw-semibold);
+  font-size: var(--text-xs);
+  text-transform: uppercase;
 }
 
 span.stats {
-    justify-content: center;
+  justify-content: center;
 }
 
 span.contract:hover {
-    cursor: help;
+  cursor: help;
 }
 
-span.QB {   
-    background-color: rgba(255, 42, 109, 1);
-}
-
-span.RB {
-    background-color: rgba(0, 189, 170, 1);
-}
-
-span.WR { 
-    background-color: rgba(88, 167, 255, 1);
-}
-span.TE {
-    background-color: rgba(255, 174, 88, 1);
-}
-
-span.K {
-    background-color: #bd66ff;
-}
-
-span.def {
-    background: #7988a1;
-    color: #fff;
-}
+span.QB  { background-color: var(--color-pos-qb); }
+span.RB  { background-color: var(--color-pos-rb); }
+span.WR  { background-color: var(--color-pos-wr); }
+span.TE  { background-color: var(--color-pos-te); }
+span.K   { background-color: var(--color-pos-k); }
+span.def { background-color: var(--color-pos-def); color: #fff; }
 
 span.team {
-    justify-content: center;
-    color: rgb(75, 75, 75);
-    font-size: 12px;
-    font-weight: 600;
+  justify-content: center;
+  color: var(--color-fg-muted);
+  font-size: var(--text-xs);
+  font-weight: var(--fw-semibold);
 }

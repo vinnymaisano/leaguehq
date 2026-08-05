@@ -2,6 +2,7 @@ import axios from "axios"
 import "../css/TradeCenter.css"
 import Row from "../components/Row"
 import TradeRosterCard from "../components/TradeRosterCard"
+import TradeSummary from "../components/TradeSummary"
 import Spinner from "../components/Spinner"
 import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
@@ -62,26 +63,35 @@ export default function TradeCenter() {
     }
 
     return (
-        <div className="mainpanel">
-            <Row height={"100%"} center={true}>
-                <TradeRosterCard 
-                    teams={teams} 
-                    rosterID={selectedRosterID1} 
-                    setRosterID={setSelectedRosterID1} 
-                    otherRosterID={selectedRosterID2} 
-                    playerMap={playersByRosterID} 
-                    selectedPlayerIDs={selectedPlayers1} 
+        <div className="mainpanel fill">
+            <Row height={"100%"} align={"stretch"}>
+                <TradeRosterCard
+                    teams={teams}
+                    rosterID={selectedRosterID1}
+                    setRosterID={setSelectedRosterID1}
+                    otherRosterID={selectedRosterID2}
+                    playerMap={playersByRosterID}
+                    selectedPlayerIDs={selectedPlayers1}
                     setSelectedPlayerIDs={setSelectedPlayers1}
                     incomingPlayerIDs={selectedPlayers2}
                 />
-                
+
+                <TradeSummary
+                    teams={teams}
+                    playerMap={playersByRosterID}
+                    rosterID1={selectedRosterID1}
+                    rosterID2={selectedRosterID2}
+                    selectedPlayerIDs1={selectedPlayers1}
+                    selectedPlayerIDs2={selectedPlayers2}
+                />
+
                 <TradeRosterCard
-                    teams={teams} 
+                    teams={teams}
                     rosterID={selectedRosterID2}
-                    setRosterID={setSelectedRosterID2} 
-                    otherRosterID={selectedRosterID1} 
-                    playerMap={playersByRosterID} 
-                    selectedPlayerIDs={selectedPlayers2} 
+                    setRosterID={setSelectedRosterID2}
+                    otherRosterID={selectedRosterID1}
+                    playerMap={playersByRosterID}
+                    selectedPlayerIDs={selectedPlayers2}
                     setSelectedPlayerIDs={setSelectedPlayers2}
                     incomingPlayerIDs={selectedPlayers1}
                 />

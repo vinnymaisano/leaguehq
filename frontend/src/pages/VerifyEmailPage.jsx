@@ -1,4 +1,5 @@
 import Card from '../components/Card'
+import Row from '../components/Row'
 import { useLocation, useSearchParams } from 'react-router-dom'
 
 export default function VerifyEmailPage() {
@@ -21,10 +22,11 @@ export default function VerifyEmailPage() {
     }
 
     return (
-        <Card width={"600px"} height={""}>
-            <div className="subtitle">{title}</div>
-            <div>{message}</div>
-        </Card>
-    
+        <Row height={"100%"} center={true}>
+            <Card table maxWidth={"420px"}>
+                <div className="table-card-head table-head-title">{title}</div>
+                <div className="login-body">{message}</div>
+            </Card>
+        </Row>
     )
 }

@@ -1,30 +1,26 @@
 div.window {
-    display: flex;
-    flex-direction: column;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    gap: 5px;
-    border: 2px solid rgba(255, 255, 255, 0.2);
-    background-color: rgba(255, 255, 255, 1);
-    border-radius: 7px;
-    box-shadow: 2px 2px 15px rgba(0, 0, 0, 0.5);
-    padding: 15px;
-    z-index: 9999;
-    overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  gap: var(--space-3);
+  border: 1px solid var(--color-border-default);
+  background-color: var(--color-canvas-default);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-overlay);
+  padding: var(--space-5);
+  z-index: 9999;
+  overflow-y: auto;
+  max-width: calc(100vw - 32px);
 }
 
 div.dialog {
-    max-height: 700px;
-    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
-    padding-left: 15px;
-    padding-right: 15px;
-    padding-top: 5px;
-    padding-bottom: 5px;
-    border-radius: 10px;
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-    overflow-x: auto;
+  max-height: 700px;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  overflow-x: auto;
 }

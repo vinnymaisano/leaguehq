@@ -102,27 +102,33 @@ export default function RostersPage() {
 
     return (
         <MainPanel>
-            <Row height={"100%"}>    
+            <Row height={"100%"}>
                 <Card height={"100%"} width={"70%"}>
-                    <RosterHeading
-                        max_year={max_year} 
-                        teams={teams} 
-                        selectedRosterID={selectedRosterID} 
-                        setSelectedRosterID={handleSetSelectedRosterID}>  
-                    </RosterHeading>
+                    <div className="table-card">
+                        <div className="roster-table-scroll">
+                            <div className="roster-inner">
+                                <RosterHeading
+                                    max_year={max_year}
+                                    teams={teams}
+                                    selectedRosterID={selectedRosterID}
+                                    setSelectedRosterID={handleSetSelectedRosterID}>
+                                </RosterHeading>
 
-                    <Roster 
-                        selected_roster={selected_roster}
-                        selectedPlayerIDs={selected_roster.map(player => player._id)}
-                        can_edit={subPurchased && (user_roster_selected || isOwner || isCommish)}
-                        max_year={max_year}
-                    />
+                                <Roster
+                                    selected_roster={selected_roster}
+                                    selectedPlayerIDs={selected_roster.map(player => player._id)}
+                                    can_edit={user_roster_selected || isOwner || isCommish}
+                                    max_year={max_year}
+                                />
+                            </div>
+                        </div>
+                    </div>
                 </Card>
 
                 <Card height={"100%"} width={"30%"}>
                 {league ? (
-                    <>
-                        <div className="subtitle">Salary cap</div>
+                    <div className="table-card">
+                        <div className="table-card-head budget-head">Salary cap</div>
                         <div className="budgetbar-container">
 
                             {Array.from({length: max_year-current_year+2}, (_, i)=> {
@@ -132,13 +138,13 @@ export default function RostersPage() {
                                         key={year}
                                         year={year}
                                         used={cap.get(year) || 0}
-                                        total={league.salary_cap}   
+                                        total={league.salary_cap}
                                     />
                                 )
                                 }
                             )}
                         </div>
-                    </>
+                    </div>
                 ) :  (
                     <div className="spinner-container">
                         <Spinner />
@@ -148,120 +154,5 @@ export default function RostersPage() {
                 </Card>
             </Row>
         </MainPanel>
-    // )
-    // return (
-    //     <MainPanel>
-    //         <Row height={"100%"}>    
-    //             <Card height={"100%"} width={"70%"}>
-    //                 <RosterHeading
-    //                     max_year={max_year} 
-    //                     teams={teams} 
-    //                     selectedRosterID={selectedRosterID} 
-    //                     setSelectedRosterID={handleSetSelectedRosterID}>  
-    //                 </RosterHeading>
-
-    //                 {loadingRosters && (
-    //                     <div className="spinner-container">
-    //                         <Spinner />
-    //                     </div>
-    //                 )}
-                    
-    //                 <div className="scroll">
-    //                 {selected_roster?.filter(player=> player.position==="QB")
-    //                 .map(player => (
-    //                     <RosterSpot
-    //                         key={player._id}
-    //                         position={player.position}
-    //                         team={player.team}
-    //                         name={player.full_name}
-    //                         age={compute_age(player.birth_date)}
-    //                         salary={get_salary_array(player.contracts) || []}
-    //                         num_years={max_year - (new Date().getFullYear())+1}
-    //                         extension={player.contracts.length > 0 && player.contracts[player.contracts.length-1].extension_eligible}
-    //                         can_extend={user_roster_selected || isOwner || isCommish}
-    //                         contract_type={player.contracts.length > 0 && player.contracts[player.contracts.length-1].contract_type}
-    //                         contracts={player.contracts}
-    //                     />
-    //                 ))}
-    //                 {selected_roster?.filter(player=> player.position==="RB")
-    //                 .map(player => (
-    //                     <RosterSpot
-    //                         key={player._id}
-    //                         position={player.position}
-    //                         team={player.team}
-    //                         name={player.full_name}
-    //                         age={compute_age(player.birth_date)}
-    //                         salary={get_salary_array(player.contracts) || []}
-    //                         num_years={max_year - (new Date().getFullYear())+1}
-    //                         extension={player.contracts.length > 0 && player.contracts[player.contracts.length-1].extension_eligible}
-    //                         can_extend={user_roster_selected || isOwner || isCommish}
-    //                         contract_type={player.contracts.length > 0 && player.contracts[player.contracts.length-1].contract_type}
-    //                         contracts={player.contracts}
-    //                     />
-    //                 ))}
-    //                 {selected_roster?.filter(player=> player.position==="WR")
-    //                 .map(player => (
-    //                     <RosterSpot
-    //                         key={player._id}
-    //                         position={player.position}
-    //                         team={player.team}
-    //                         name={player.full_name}
-    //                         age={compute_age(player.birth_date)}
-    //                         salary={get_salary_array(player.contracts) || []}
-    //                         num_years={max_year - (new Date().getFullYear())+1}
-    //                         extension={player.contracts.length > 0 && player.contracts[player.contracts.length-1].extension_eligible}
-    //                         can_extend={user_roster_selected || isOwner || isCommish}
-    //                         contract_type={player.contracts.length > 0 && player.contracts[player.contracts.length-1].contract_type}
-    //                         contracts={player.contracts}
-    //                     />
-                        
-    //                 ))}
-    //                 {selected_roster?.filter(player=> player.position==="TE")
-    //                 .map(player => (
-    //                     <RosterSpot
-    //                         key={player._id}
-    //                         position={player.position}
-    //                         team={player.team}
-    //                         name={player.full_name}
-    //                         age={compute_age(player.birth_date)}
-    //                         salary={get_salary_array(player.contracts) || []}
-    //                         num_years={max_year - (new Date().getFullYear())+1}
-    //                         extension={player.contracts.length > 0 && player.contracts[player.contracts.length-1].extension_eligible}
-    //                         can_extend={user_roster_selected || isOwner || isCommish}
-    //                         contract_type={player.contracts.length > 0 && player.contracts[player.contracts.length-1].contract_type}
-    //                         contracts={player.contracts}
-    //                     />
-    //                 ))}
-    //                 </div>
-    //             </Card>
-    //             <Card height={"100%"} width={"30%"}>
-    //             {league ?(
-    //                 <>
-    //                     <div className="subtitle">Salary cap</div>
-    //                     <div className="budgetbar-container">
-
-    //                         {Array.from({length: max_year-current_year+2}, (_, i)=> {
-    //                             const year = current_year+i
-    //                             return (
-    //                                 <BudgetBar
-    //                                     key={year}
-    //                                     year={year}
-    //                                     used={cap.get(year) || 0}
-    //                                     total={league.salary_cap}   
-    //                                 />
-    //                             )
-    //                             }
-    //                         )}
-    //                     </div>
-    //                 </>
-    //             ) :  (
-    //                 <div className="spinner-container">
-    //                     <Spinner />
-    //                     Loading salary cap info...
-    //                 </div>
-    //             )}
-    //             </Card>
-    //         </Row>
-    //     </MainPanel>
         )
 }

@@ -9,9 +9,7 @@ import "../css/EditContract.css"
 import ConfirmationDialog from "./ConfirmationDialog"
 
 export default function EditContractDialog({isOpen, name, title, player_id, onConfirm, onCancel, onDelete, contracts}) {
-    // console.log(contracts)
     if (!isOpen) return null
-    // console.log(contracts)
     const {league} = useLeague()
     const [loading, setLoading] = useState(false)
     const [editedContracts, setEditedContracts] = useState(()=>
@@ -63,29 +61,17 @@ export default function EditContractDialog({isOpen, name, title, player_id, onCo
     function edit_new_contract(e) {
         setNewContract(prev => {
             if (e.target.name === "extension_eligible") {
-                // console.log({
-                //     ...prev,
-                //     extension_eligible: Boolean(parseInt(e.target.value))
-                // })
                 return {
                     ...prev,
                     extension_eligible: Boolean(parseInt(e.target.value))
                 }
             }
             if (e.target.name === "length") {
-                // console.log({
-                //     ...prev,
-                //     end_year: parseInt(prev.start_year) + parseInt(e.target.value) - 1
-                // })
                 return {
                     ...prev,
                     end_year: parseInt(prev.start_year) + parseInt(e.target.value) - 1
                 }
             }
-            // console.log({
-            //     ...prev,
-            //     [e.target.name]: e.target.value
-            // })
             return {
                 ...prev,
                 [e.target.name]: e.target.value
@@ -124,10 +110,7 @@ export default function EditContractDialog({isOpen, name, title, player_id, onCo
                                     onChange={e => edit_contract_length(i, e.target.value)}
                                     value={contract.end_year - contract.start_year + 1}
                                     name="length" id="length" className="dropdown">
-                                    <option value={1}>1 year</option>
-                                    <option value={2}>2 years</option>
-                                    <option value={3}>3 years</option>
-                                    <option value={4}>4 years</option>
+                                    {[1, 2, 3, 4].map(y => <option key={y} value={y}>{y === 1 ? "1 year" : `${y} years`}</option>)}
                                 </select>
                             </div>
 
@@ -168,10 +151,7 @@ export default function EditContractDialog({isOpen, name, title, player_id, onCo
                                     onChange={e => edit_new_contract(e)}
                                     value={newContract.end_year - newContract.start_year + 1}
                                     name="length" id="length" className="dropdown">
-                                    <option value={1}>1 year</option>
-                                    <option value={2}>2 years</option>
-                                    <option value={3}>3 years</option>
-                                    <option value={4}>4 years</option>
+                                    {[1, 2, 3, 4].map(y => <option key={y} value={y}>{y === 1 ? "1 year" : `${y} years`}</option>)}
                                 </select>
                             </div>
 

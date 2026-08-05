@@ -52,11 +52,12 @@ export default function ResetPasswordPage() {
 
 
     return (
-        <Row height={"100%"}>
-            <Card width={"600px"} height={""} padding={"30px"}>
-                <div className="title">Reset password</div>  
+        <Row height={"100%"} center={true}>
+            <Card table maxWidth={"420px"}>
+                <div className="table-card-head table-head-title">Reset password</div>
+                <div className="login-body">
                 <div className="form-container">
-                    
+
                     <div className="input-container">
                         <div className="label">New password:</div>
                         <input type="password" className="text-input" value={newPassword} onChange={(e) => setNewPassword(e.target.value)}></input>
@@ -68,7 +69,7 @@ export default function ResetPasswordPage() {
                     </div>
 
 
-                    <div className="error">{errorMessage ? `${errorMessage}` : ""}</div>    
+                    <div className="error">{errorMessage}</div>
                     
                     <div className="submit-container">
                         <HeaderButton background={true} onClick={change_password}>Submit</HeaderButton>
@@ -77,6 +78,7 @@ export default function ResetPasswordPage() {
                         )}
                     </div>
 
+                </div>
                 </div>
             </Card>
         </Row>

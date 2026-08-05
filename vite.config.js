@@ -7,7 +7,7 @@ export default defineConfig({
   root: path.resolve(__dirname, 'frontend'),
   plugins: [react()],
   server: {
-    host: "localhost",
+    host: true,
     port: 5173,
     proxy: {
       "/api": {

@@ -1,50 +1,48 @@
 .extend-button {
-    color: rgba(0, 0, 0, 0.25);
-    width: 15px;
+  color: var(--color-fg-subtle);
+  width: 15px;
 }
 .extend-button:hover {
-    cursor: pointer;
+  cursor: pointer;
+  color: var(--color-fg-default);
 }
 
 div.extension-form-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
 }
 
-/* div.salary-years {
-    border: 1px solid black;
-    width: 100%;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    margin-bottom: 10px;
-} */
-
 div.salary-years {
-    margin-top: 10px;
-    margin-bottom: 10px;
-    display: flex;
-    width: 350px;
-    justify-content: space-between;
+  margin-top: var(--space-3);
+  margin-bottom: var(--space-3);
+  display: flex;
+  width: 350px;
+  max-width: 100%;
+  justify-content: space-between;
 }
 
 div.contract-label {
-    font-weight: 600;
+  font-weight: var(--fw-semibold);
 }
 
-
 .contract-info {
-    width: 100px;
-    height: 40px;
-    padding-left: 10px;
-    border: 1px solid rgb(185, 185, 185);
-    background-color: rgba(255, 255, 255, 0.3);
-    border-radius: 5px;
+  width: 100px;
+  height: 36px;
+  padding: 0 var(--space-3);
+  border: 1px solid var(--color-border-default);
+  background-color: var(--color-canvas-default);
+  color: var(--color-fg-default);
+  border-radius: var(--radius-md);
+}
+.contract-info:focus {
+  outline: none;
+  border-color: var(--color-accent-emphasis);
+  box-shadow: 0 0 0 2px var(--color-accent-subtle);
 }
 
 .cant-edit {
-    cursor: not-allowed;
+  cursor: not-allowed;
 }

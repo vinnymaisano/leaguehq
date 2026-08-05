@@ -1,16 +1,16 @@
 import '../css/RosterSpot.css'
-import { FaCheck, FaBan } from "react-icons/fa"
+import { LuCheck, LuBan } from "react-icons/lu"
 import ExtendButton from './ExtendButton';
 import EditContractButton from './EditContractButton';
 import { useLeague } from '../contexts/LeagueContext';
 
-export default function RosterSpot({position, team, name, age, salary, num_years=0, subscription, extension, contract_type, contracts, can_extend, player_id, can_edit, isSelected, onSelect, inDialog}) {
+export default function RosterSpot({position, team, name, age, salary, num_years=0, subscription, subscribed=false, extension, contract_type, contracts, can_extend, player_id, can_edit, isSelected, onSelect, inDialog}) {
     const {league} = useLeague()
     // information needed for extensions
     const price_hike = league.extension_price_hike
     const max_length = league.max_extension_length
     const extension_start_year = (contracts.length > 0) ? parseInt(contracts[contracts.length-1].end_year) + 1 : new Date().getFullYear()
-
+    
     let alt_text;
     if (extension) {
         alt_text = "Player is eligible for a contract extension."
@@ -47,7 +47,7 @@ export default function RosterSpot({position, team, name, age, salary, num_years
             <span className="team">{team}</span>
             <span className="name">{name}</span>
             <span className="stats">{age}</span>    
-            <span style={{color: extension ? "rgb(0, 125, 0)" : "rgb(150, 0, 0)"}} className="stats contract" title={alt_text}>{extension ? <FaCheck/> : <FaBan/>}</span>     
+            <span style={{color: extension ? "rgb(0, 125, 0)" : "rgb(150, 0, 0)"}} className="stats contract" title={alt_text}>{extension ? <LuCheck/> : <LuBan/>}</span>     
             
             {!inDialog && Array.from({length: num_years}).map((_, i) => (
                 <span key={i} className="stats">
@@ -62,16 +62,18 @@ export default function RosterSpot({position, team, name, age, salary, num_years
                         start_year={extension_start_year}
                         name={name}
                         current_contract={contracts[contracts.length-1] || null}
+                        subscribed={subscribed}
                     />
                 </span>
             }
 
             {can_edit && 
                 <span className="stats">
-                    <EditContractButton 
+                    <EditContractButton
                         contracts={contracts}
                         name={name}
                         player_id={player_id}
+                        subscribed={subscribed}
                     />
                 </span>
             }

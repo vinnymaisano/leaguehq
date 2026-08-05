@@ -2,7 +2,7 @@ import { createContext, useContext, useEffect, useState } from 'react'
 import { useParams, useLocation } from 'react-router-dom'
 import axios from "axios"
 import { useAuth } from './AuthContext'
-import {is_subscription_active} from "../utils/utils.js"
+import {is_subscription_active, league_display_name} from "../utils/utils.js"
 import Spinner from '../components/Spinner.jsx'
 
 const LeagueContext = createContext()
@@ -36,7 +36,7 @@ export function LeagueProvider({children}) {
     }
     // only set if league has loaded
     if (league) {
-      document.title = `${page ? `${page} -` : ""} ${league?.name} |  LeagueHQ`
+      document.title = `${page ? `${page} -` : ""} ${league_display_name(league)} |  LeagueHQ`
     }
 
     useEffect(()=> {
@@ -68,6 +68,7 @@ export function LeagueProvider({children}) {
       get_league()
     }, [league_id, user, loadingAuth])
 
+
     useEffect(() => {
         if (!league) return
         // start from newest sleeper league id
@@ -78,7 +79,8 @@ export function LeagueProvider({children}) {
         async function get_sub_history() {
             for (const id of sleeper_league_ids) {
                 try {
-                    const url = `/api/${id}/subscription-history`
+                    const url = `/api/leagues/${id}/subscription-history`
+                    console.log(url)
                     const res = await axios.get(url)
                     const history = res.data.history
                     if (history.length > 0) {
@@ -134,5 +136,5 @@ export function LeagueProvider({children}) {
     }
 
 export function useLeague() {
-    return useContext(LeagueContext);s
+    return useContext(LeagueContext);
 }

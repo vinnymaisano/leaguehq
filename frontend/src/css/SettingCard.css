@@ -1,88 +1,85 @@
-div.setting-card {
-    width: 750px;
-    height: 50px;
-    overflow-x: auto;
-    overflow-y: auto;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    background: rgba(255, 255, 255, 0);
-    border-radius: 10px;
-    box-shadow: 2px 2px 15px rgba(0, 0, 0, 0.1);
-    backdrop-filter: blur(0px); /* the glass effect */
-    -webkit-backdrop-filter: blur(10px); /* for Safari */
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    padding: 10px;
-    animation: fade_in 0.15s ease-out forwards;
-    transition: background-color 0.1s linear;
-    color: black;
+/* settings menu row: title + icon on the left, chevron on the right */
+.setting-row {
+  justify-content: space-between;
+  min-height: 52px;
 }
-
-.setting-card:hover {
-  cursor: pointer;
-  background-color: rgba(0, 0, 0, 0.03);
-  /* background: rgba(205, 218, 240, 0.2); */
-  transition: background-color 0.1s linear;
+.setting-row-main {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
 }
-
 .setting-icon {
-    width: 17px;
-    height: 17px;
+  width: 16px;
+  height: 16px;
+  color: var(--color-fg-muted);
+  flex-shrink: 0;
+}
+.setting-chevron {
+  color: var(--color-fg-muted);
+  flex-shrink: 0;
 }
 
 div.horizontal-flex {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding-left: 10px;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
 }
 
 div.center-vertical {
-    display: flex;
-    align-items: center
+  display: flex;
+  align-items: center;
 }
 
 div.space-between {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
 }
 
 div.space {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    padding: 10px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding: var(--space-3);
 }
 
 div.icon-container {
-    margin-right: 10px;
-    height: 100%;
-    display: flex;
-    justify-self: center;
-    align-items: center;
+  margin-right: var(--space-2);
+  height: 100%;
+  display: flex;
+  align-items: center;
+  color: var(--color-fg-muted);
 }
 
 div.setting-name {
-    font-size: 18px;
-    font-weight: 600;
+  font-size: var(--text-md);
+  font-weight: var(--fw-medium);
 }
 
 div.settings-container {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    margin-top: 5px;
-    gap: 10px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  margin-top: var(--space-2);
+  gap: var(--space-2);
 }
 
-div.back-button {
-    height: 100%;
-    display: flex;
-    justify-self: center;
-    align-items: center;
+.back-button {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  width: fit-content;
+  font-size: var(--text-sm);
+  font-weight: var(--fw-medium);
+  color: var(--color-fg-muted);
+}
+.back-button:hover {
+  color: var(--color-fg-default);
+}
+.back-button-icon {
+  width: 16px;
+  height: 16px;
 }

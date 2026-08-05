@@ -64,9 +64,10 @@ export default function RegisterPage() {
     }
 
     return (
-        <Row height={"100%"}>
-            <Card width={"600px"} height={""} padding={"30px"}>
-                <div className="title">Create account</div>
+        <Row height={"100%"} center={true}>
+            <Card table maxWidth={"420px"}>
+                <div className="table-card-head table-head-title">Create account</div>
+                <div className="login-body">
                 <div className="form-container">
                     
                     <div className="input-container">
@@ -89,7 +90,7 @@ export default function RegisterPage() {
                         <input type="password" name="verify_password" value={formData.verify_password} onChange={change_form_data} onKeyDown={(e) => check_enter_press(e)}></input>
                     </div>
 
-                    <div className="error">{errorMessage ? `${errorMessage}` : ""}</div>
+                    <div className="error">{errorMessage}</div>
                     
                     <div className="submit-container">
                         {!loading ? (
@@ -98,7 +99,8 @@ export default function RegisterPage() {
                             <Spinner />
                         )}
                     </div>
-                    
+
+                </div>
                 </div>
             </Card>
         </Row>

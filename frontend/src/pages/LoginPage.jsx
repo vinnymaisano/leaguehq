@@ -68,10 +68,11 @@ export default function LoginPage() {
     }
 
     return (
-        <Row height={"100%"}>
-            <Card width={"600px"} height={""} padding={"30px"}>
-                <div className="title">Login</div>
+        <Row height={"100%"} center={true}>
+            <Card table maxWidth={"420px"}>
+                <div className="table-card-head table-head-title">Login</div>
 
+                <div className="login-body">
                 <div className="form-container">
                         
                     <div className="input-container">
@@ -84,7 +85,7 @@ export default function LoginPage() {
                         <input type="password" name="password" value={formData.password} onChange={change_form_data} onKeyDown={(e) => check_enter_press(e)}></input>
                     </div>
 
-                    <div className="error">{errorMessage ? `${errorMessage}` : ""}</div>
+                    <div className="error">{errorMessage}</div>
                     <div className="submit-container">
                         <HeaderButton onClick={submit_form}>Log In</HeaderButton>
                         {loading ? (
@@ -93,7 +94,8 @@ export default function LoginPage() {
                             <div><span onClick={() => navigate("/forgot-password")}className="link">Forgot password</span></div>
                         )}
                     </div>
-                    
+
+                </div>
                 </div>
 
             </Card>

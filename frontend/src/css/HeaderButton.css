@@ -1,60 +1,32 @@
-/*span.header-button {
-    display: inline-flex;
-    box-sizing: border-box;
-    align-items: center;
-    justify-content: center;
-    color: rgb(24, 24, 24);
-    background-color: rgba(208, 217, 230, 1);
-    width: 90px;
-    height: 30px;
-    border: 1px solid rgb(171, 178, 189);
-    margin-right: 20px;
-    border-radius: 10px;
-    font-size: 14px;
-    transition: box-shadow 0.05s ease;
-    transition: background-color 0.2s ease;
-}
-
-
-
-span.header-button:hover {
-    cursor: pointer;
-    background-color: rgba(208, 217, 230, 0.2);
-    box-shadow: 2px 1px 3px rgba(0, 0, 0, 0.1);
-}
-*/
-
 .header-button {
-    cursor: pointer;
-    font-size: 14px;
-    font-weight: 500;
-    min-width: 80px;
-    padding-left: 10px;
-    padding-right: 10px;
-    height: 35px;
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-    color: rgb(0, 0, 0);
-    background-color: rgba(255, 255, 255, 0.2);
-    border: 1px solid rgb(40, 40, 40);
-    border-radius: 100px;
-    box-shadow: 1px 1px 3px rgb(0, 0, 0, 0.1);
-    transition: background-color 0.05s;
+  cursor: pointer;
+  font-size: var(--text-base);
+  font-weight: var(--fw-medium);
+  min-width: 80px;
+  padding: 0 var(--space-3);
+  height: 32px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--color-fg-default);
+  background-color: var(--color-canvas-subtle);
+  border: 1px solid var(--color-border-default);
+  border-radius: var(--radius-md);
+  transition: background-color 0.08s ease, border-color 0.08s ease;
 }
 
 .with-background {
-    /* background-color: rgb(40, 40, 40); */
-    /* background-color: rgba(0, 113, 227); */
-    background-color: rgb(40, 40, 40);
-    border: 1px solid black;
-    color: white;
+  background-color: var(--color-btn-primary-bg);
+  border: 1px solid var(--color-btn-primary-bg);
+  color: var(--color-btn-primary-fg);
 }
 
-.header-button:hover, button:hover {
-    background-color: rgba(225, 225, 225, 0.2);
+.header-button:hover {
+  background-color: var(--color-canvas-hover);
+  border-color: var(--color-border-hover);
 }
 
 .with-background:hover {
-    background-color: rgb(50, 50, 50);
+  background-color: var(--color-btn-primary-bg-hover);
+  border-color: var(--color-btn-primary-bg-hover);
 }

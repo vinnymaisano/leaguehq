@@ -1,42 +1,63 @@
 div.budgetbar-container {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 15px;
-    margin-top: 5px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* header label for the salary cap table */
+div.budget-head {
+  padding: var(--space-2) var(--space-3);
+  font-size: var(--text-md);
+  color: var(--color-fg-default);
+}
+
+/* each year is a divided row inside the table-card */
+div.budget-row {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding: var(--space-3);
+  border-bottom: 1px solid var(--color-border-muted);
+}
+div.budget-row:last-child {
+  border-bottom: none;
 }
 
 div.budgetbar {
-    display: flex;
-    height: 15px;
-    width: 100%;
-    border-radius: 4px;
-    background: rgba(255, 255, 255, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.5);
-    box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.2);
-    padding: 0px;
+  display: flex;
+  height: 8px;
+  width: 100%;
+  border-radius: var(--radius-full);
+  background: var(--color-canvas-subtle);
+  border: 1px solid var(--color-border-default);
+  overflow: hidden;
+  padding: 0;
 }
 
-div.budget-used, div.budget-free {
-    border-radius: 3px;
-    height: 100%;
+div.budget-used,
+div.budget-free {
+  height: 100%;
 }
 
 div.budget-used {
-    background-color: rgba(255, 255, 255, 0.65);
-    transition: width 1s linear;
+  transition: width 1s linear;
+}
+
+div.budget-free {
+  /* background-color: var(--color-canvas-overlay); */
+  background: transparent;
 }
 
 div.year {
-    font-size: 18px;
-    font-weight: 600;
-    color: black;
+  font-size: var(--text-md);
+  font-weight: var(--fw-semibold);
+  color: var(--color-fg-default);
 }
 
 div.space-between-budget {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  color: var(--color-fg-muted);
 }

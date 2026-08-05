@@ -4,7 +4,7 @@ import { get_salary_array } from "../utils/utils"
 import { useLeague } from "../contexts/LeagueContext"
 
 export default function Roster({selected_roster, can_edit, max_year, inDialog, selectedPlayerIDs, setSelectedPlayerIDs}) {
-    const {subStatus} = useLeague()
+    const {subStatus, subPurchased} = useLeague()
 
     function compute_age(birth_date) {
         if (!birth_date) return "?";
@@ -28,89 +28,35 @@ export default function Roster({selected_roster, can_edit, max_year, inDialog, s
 
     const visible_roster = !inDialog ? selected_roster.filter(player => selectedPlayerIDs.includes(player._id)) : selected_roster
 
+    // render players grouped by position, in this order
+    const positions = ["QB", "RB", "WR", "TE"]
+
     return (
         <div className={classname}>
-        {visible_roster?.filter(player=> player.position==="QB")
-        .map(player => (
-            <RosterSpot
-                key={player._id}
-                position={player.position}
-                team={player.team}
-                name={player.full_name}
-                age={compute_age(player.birth_date)}
-                salary={get_salary_array(player.contracts)}
-                num_years={max_year - (new Date().getFullYear())+1}
-                extension={player.contracts.length > 0 && player.contracts[player.contracts.length-1].extension_eligible}
-                subscription={subStatus}
-                can_extend={can_edit && subStatus}
-                contract_type={player.contracts.length > 0 && player.contracts[player.contracts.length-1].contract_type}
-                contracts={player.contracts}
-                isSelected={inDialog ? selectedPlayerIDs.includes(player._id) : false}
-                onSelect={inDialog ? () => handle_select(player._id) : undefined}
-                inDialog={inDialog}
-            />
-        ))}
-        {visible_roster?.filter(player=> player.position==="RB")
-        .map(player => (
-            <RosterSpot
-                key={player._id}
-                position={player.position}
-                team={player.team}
-                name={player.full_name}
-                age={compute_age(player.birth_date)}
-                salary={get_salary_array(player.contracts)}
-                num_years={max_year - (new Date().getFullYear())+1}
-                extension={player.contracts.length > 0 && player.contracts[player.contracts.length-1].extension_eligible}
-                subscription={subStatus}
-                can_extend={can_edit && subStatus}
-                contract_type={player.contracts.length > 0 && player.contracts[player.contracts.length-1].contract_type}
-                contracts={player.contracts}
-                isSelected={inDialog ? selectedPlayerIDs.includes(player._id) : false}
-                onSelect={inDialog ? () => handle_select(player._id) : undefined}
-                inDialog={inDialog}
-            />
-        ))}
-        {visible_roster?.filter(player=> player.position==="WR")
-        .map(player => (
-            <RosterSpot
-                key={player._id}
-                position={player.position}
-                team={player.team}
-                name={player.full_name}
-                age={compute_age(player.birth_date)}
-                salary={get_salary_array(player.contracts)}
-                num_years={max_year - (new Date().getFullYear())+1}
-                extension={player.contracts.length > 0 && player.contracts[player.contracts.length-1].extension_eligible}
-                subscription={subStatus}
-                can_extend={can_edit && subStatus}
-                contract_type={player.contracts.length > 0 && player.contracts[player.contracts.length-1].contract_type}
-                contracts={player.contracts}
-                isSelected={inDialog ? selectedPlayerIDs.includes(player._id) : false}
-                onSelect={inDialog ? () => handle_select(player._id) : undefined}
-                inDialog={inDialog}
-            />
-            
-        ))}
-        {visible_roster?.filter(player=> player.position==="TE")
-        .map(player => (
-            <RosterSpot
-                key={player._id}
-                position={player.position}
-                team={player.team}
-                name={player.full_name}
-                age={compute_age(player.birth_date)}
-                salary={get_salary_array(player.contracts)}
-                num_years={max_year - (new Date().getFullYear())+1}
-                extension={player.contracts.length > 0 && player.contracts[player.contracts.length-1].extension_eligible}
-                subscription={subStatus}
-                can_extend={can_edit && subStatus}
-                contract_type={player.contracts.length > 0 && player.contracts[player.contracts.length-1].contract_type}
-                contracts={player.contracts}
-                isSelected={inDialog ? selectedPlayerIDs.includes(player._id) : false}
-                onSelect={inDialog ? () => handle_select(player._id) : undefined}
-                inDialog={inDialog}
-            />
-        ))}
+        {positions.flatMap(position =>
+            (visible_roster || [])
+                .filter(player => player.position === position)
+                .map(player => (
+                    <RosterSpot
+                        key={player._id}
+                        position={player.position}
+                        team={player.team}
+                        name={player.full_name}
+                        age={compute_age(player.birth_date)}
+                        salary={get_salary_array(player.contracts)}
+                        num_years={max_year - (new Date().getFullYear())+1}
+                        extension={player.contracts.length > 0 && player.contracts[player.contracts.length-1].extension_eligible}
+                        subscription={subStatus}
+                        subscribed={subPurchased}
+                        can_extend={can_edit}
+                        contract_type={player.contracts.length > 0 && player.contracts[player.contracts.length-1].contract_type}
+                        contracts={player.contracts}
+                        isSelected={inDialog ? selectedPlayerIDs.includes(player._id) : false}
+                        onSelect={inDialog ? () => handle_select(player._id) : undefined}
+                        inDialog={inDialog}
+                    />
+                ))
+        )}
         </div>
     )
 }

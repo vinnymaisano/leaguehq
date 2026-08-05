@@ -1,6 +1,7 @@
 import axios from "axios"
 import { useNavigate } from "react-router-dom"
 import { useState, useEffect } from "react"
+import Card from "../components/Card"
 import HeaderButton from "../components/HeaderButton"
 import ConfirmationDialog from "../components/ConfirmationDialog"
 import { useAuth } from "../contexts/AuthContext"
@@ -12,7 +13,6 @@ export default function DeleteAccount() {
     const {user, refresh_user, loadingAuth} = useAuth()
 
     async function delete_account(password) {
-        // console.log('delete_account')
         try {
             const url = "/auth/me"
             const res = await axios.delete(url, {
@@ -31,24 +31,27 @@ export default function DeleteAccount() {
 
     return (
         <>
-            <div className="subtitle">Delete account</div>
-            <div className="content-gap">
-                <div>Are your sure you want to permanently delete your account?</div>
+            <Card table maxWidth={"560px"}>
+                <div className="table-card-head table-head-title">Delete account</div>
+                <div className="table-body">
+                    <div className="content-gap">
+                        <div>Are your sure you want to permanently delete your account?</div>
 
-                {loadingAuth || !user ? (
-                    <div className="spinner-container">
-                        <Spinner />
+                        {loadingAuth || !user ? (
+                            <div className="spinner-container">
+                                <Spinner />
+                            </div>
+                        ) : (
+                            <div className="header-button-container">
+                                <HeaderButton onClick={() => navigate("/home/account")}>Cancel</HeaderButton>
+                                <HeaderButton onClick={() => setShowDialog(true)} background={true}>Delete account</HeaderButton>
+                            </div>
+                        )}
                     </div>
-                ) : (
-                    <div className="header-button-container">
-                        <HeaderButton onClick={() => navigate("/home/account")}>Cancel</HeaderButton>
-                        <HeaderButton onClick={() => setShowDialog(true)} background={true}>Delete account</HeaderButton>
-                    </div>
-                )}
+                </div>
+            </Card>
 
-            </div>
-
-            <ConfirmationDialog 
+            <ConfirmationDialog
                 isOpen={showDialog}
                 title={"Delete account"}
                 message={"Please confirm that you want to delete your LeagueHQ account."}

@@ -1,58 +1,35 @@
 div.header-layout {
-    display: grid;
-    grid-template-rows: 75px 1fr;
-    grid-template-columns: 1fr;
-    height: 100vh;
-    background-color: #edf2f9;;
-    /* background: linear-gradient(to top right, rgba(208, 217, 230, 0.4), rgba(208, 216, 230)); */
-    /* background-color: rgb(235, 242, 255); */
-    /* background: linear-gradient(to top right, rgb(235, 242, 255), rgb(195, 209, 234)); */
-    /* background-color: rgb(212, 218, 231); */
-    /* background-color: rgb(212, 218, 231); */
-    /* background-color: rgb(240, 240, 240); */
-}
-
-div.header-content {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    height: 100%;
-    width: 100%;
-}
-
-div.header {
-    padding: 5px;
-    background: none;
-    height: 100%;
+  display: grid;
+  grid-template-rows: var(--topbar-height) 1fr;
+  grid-template-columns: 1fr;
+  height: 100vh;
+  background-color: var(--color-canvas-default);
 }
 
 div.content {
-    overflow-y: auto;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding-top: 5px;
-    padding-bottom: 15px;
-    background-color: transparent;
+  overflow-y: auto;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: var(--space-5);
+  padding-bottom: var(--space-4);
+  background-color: transparent;
 }
 
-
-
 div.username {
-    font-weight: 600;
-    color: rgb(0, 0, 0);
-    margin-right: 15px;
-    display: flex;
-    align-items: center;
+  font-weight: var(--fw-semibold);
+  color: var(--color-fg-default);
+  margin-right: var(--space-4);
+  display: flex;
+  align-items: center;
 }
 
 .header-button-container {
-    display: flex;
-    gap: 10px;
+  display: flex;
+  gap: var(--space-3);
 }
 
 .login {
-    margin: 10px;
+  margin: var(--space-3);
 }
-

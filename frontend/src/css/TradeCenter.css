@@ -1,96 +1,140 @@
-div.roster-container {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    flex-direction: column;
-    gap: 10px;
+/* Contained roster table fills the card; the player list scrolls inside it
+   while the header stays put and the cap table sits pinned below. Keeps the
+   standard .table-card border + radius so it matches the Rosters/Contracts
+   pages. */
+div.trade-table {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
 }
 
-div.trade-roster-container {
-    display: flex;
-    flex-direction: column;
-    
-    gap: 10px;
+/* header + rows share one horizontal scroll region so the year columns stay
+   aligned with the player rows (see .roster-table-scroll in Roster.css) */
+div.trade-table .roster-table-scroll {
+  flex: 1;
+  min-height: 0;
 }
 
-div.add-player {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    gap: 5px;
+/* ---- Select players button ---- */
+.add-player-button {
+  display: inline-flex;
+  gap: var(--space-2);
+  background-color: var(--color-canvas-subtle);
+  border: 1px solid var(--color-border-default);
+  color: var(--color-fg-default);
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  height: 32px;
+  padding: 0 var(--space-4);
+  font-weight: var(--fw-medium);
+  border-radius: var(--radius-md);
+  transition: background-color 0.08s ease, border-color 0.08s ease;
 }
 
-div.add-player:hover {
-    cursor: pointer;
+.add-player-button:hover {
+  background-color: var(--color-canvas-hover);
+  border-color: var(--color-border-hover);
 }
 
-.select-players-button {
-    border-radius: 5px; 
-    border: 2px solid rgba(198, 216, 255, 0.3);
-    background: rgba(205, 218, 240, 0.8);
-    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
-    width: 150px;
-    padding: 10px;
+/* ---- Cap space table ---- */
+/* Flat, lined table (no rounded corners) rather than a floating card. */
+div.cap-table {
+  width: 100%;
+  flex-shrink: 0;
+  border: 1px solid var(--color-border-default);
+  overflow: hidden;
 }
 
-div.cap-info {
-    border-radius: 5px;
-    /* border: 2px solid rgba(198, 216, 255, 0.3); */
-    /* background: rgba(205, 218, 240, 0.8); */
-    /* background: rgba(205, 218, 240, 0.2); */
-    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
-    border: 1px solid rgba(0, 0, 0, 0.2);
-    padding: 5px;
-    width: 180px;
+div.cap-table-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: var(--space-3);
+  padding: var(--space-2) var(--space-3);
+  align-items: center;
 }
 
-div.cap-info-container {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    width: 100%;
-    flex-flow: wrap;
+div.cap-table-row:not(:last-child) {
+  border-bottom: 1px solid var(--color-border-muted);
+}
+
+div.cap-table-head {
+  background: var(--color-canvas-subtle);
+  color: var(--color-fg-muted);
+  font-weight: var(--fw-semibold);
+  font-size: var(--text-base);
+}
+
+span.cap-table-year {
+  font-weight: var(--fw-semibold);
 }
 
 span.net-positive {
-    color: rgb(0, 130, 0);
-    font-weight: 600;
+  color: var(--color-success-fg);
+  font-weight: var(--fw-semibold);
 }
 
 span.net-negative {
-    color: rgb(140, 0, 0);
-    font-weight: 600;
+  color: var(--color-danger-fg);
+  font-weight: var(--fw-semibold);
 }
 
-div.trade-card-content {
-    min-width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+/* ---- Trade summary (center panel) ---- */
+div.trade-summary {
+  flex: 0 0 280px;
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  padding: var(--space-4);
+  border: 1px solid var(--color-border-default);
+  border-radius: var(--radius-md);
+  background: var(--color-canvas-subtle);
 }
 
-div.add-player-button {
-    display: inline-flex;
-    gap: 5px;
-    background-color: rgba(255, 255, 255, 0.4);
-    border: 1px solid black;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-    height: 40px;
-    /* width: 200px; */
-    padding: 15px;
-    font-weight: 600;
-    border-radius: 100px;
-    overflow: hidden;
+div.trade-summary-title {
+  font-weight: var(--fw-semibold);
+  font-size: var(--text-md);
 }
 
-div.add-player-button:hover {
-    background-color: rgba(240, 240, 240, 0.5)
+div.trade-summary-side {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+div.trade-summary-heading {
+  font-weight: var(--fw-semibold);
+  color: var(--color-fg-muted);
+}
+
+div.trade-summary-empty {
+  color: var(--color-fg-muted);
+  font-size: var(--text-base);
+}
+
+div.trade-summary-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+div.trade-summary-player {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+span.trade-summary-name {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+span.trade-summary-salary {
+  font-weight: var(--fw-semibold);
+  flex-shrink: 0;
 }

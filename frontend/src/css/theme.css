@@ -1,0 +1,550 @@
+/* ==========================================================================
+   Design tokens + base reset  (GitHub-light inspired, neutral accent)
+   Single source of truth for colors, spacing, typography and shared classes.
+   ========================================================================== */
+
+:root {
+  /* ----- Canvas / surfaces ----- */
+  --color-canvas-default: #ffffff;   /* main content background */
+  --color-canvas-subtle:  #f6f8fa;   /* sidebar, table stripes, insets */
+  --color-canvas-inset:   #f6f8fa;
+  --color-canvas-hover:    #eaeef2;  /* row / control hover */
+  --color-canvas-active:   #e5e9ec;  /* pressed / selected */
+  --color-canvas-overlay:  rgba(31, 35, 40, 0.5); /* modal backdrop */
+
+  /* ----- Borders (soft hairlines; muted is near-invisible for row dividers) ----- */
+  --color-border-default: #e3e7ec;
+  --color-border-muted:   #eef1f4;
+  --color-border-hover:   #afb8c1;  /* control/card hover edge */
+
+  /* ----- Foreground text ----- */
+  --color-fg-default:     #1f2328;
+  --color-fg-muted:       #656d76;
+  --color-fg-subtle:      #6e7781;
+  --color-fg-on-emphasis: #ffffff;
+
+  /* ----- Accent (neutral / near-black per design choice) ----- */
+  --color-accent-fg:        #1f2328;
+  --color-accent-emphasis:  #1f2328;
+  --color-accent-subtle:    #eaeef2;
+
+  /* ----- System blue (links, active tab indicator, focus rings) ----- */
+  --color-accent-blue:        #0969da;
+  --color-accent-blue-hover:  #0757ba;
+  --color-accent-blue-subtle: rgba(9, 105, 218, 0.12);
+
+  /* ----- Emphasis (primary buttons) ----- */
+  --color-btn-primary-bg:       #1f2328;
+  --color-btn-primary-bg-hover: #32383f;
+  --color-btn-primary-fg:       #ffffff;
+
+  /* ----- Semantic status ----- */
+  --color-success-fg:  #1a7f37;
+  --color-danger-fg:   #cf222e;
+  --color-attention-fg:#9a6700;
+  --color-done-fg:     #8250df;
+
+  /* ----- Position badge colors ----- */
+  --color-pos-qb:  #e5305f;
+  --color-pos-rb:  #00bdaa;
+  --color-pos-wr:  #58a7ff;
+  --color-pos-te:  #f0973a;
+  --color-pos-k:   #bd66ff;
+  --color-pos-def: #7988a1;
+
+  /* ----- Radius (rounder = softer) ----- */
+  --radius-sm:   6px;
+  --radius-md:   8px;
+  --radius-lg:  14px;
+  --radius-full: 999px;
+
+  /* ----- Spacing scale (8px base) ----- */
+  --space-1:  4px;
+  --space-2:  8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+
+  /* ----- Shadows (subtle; desktop, not floating cards) ----- */
+  --shadow-resting: 0 1px 0 rgba(31, 35, 40, 0.04);
+  --shadow-overlay: 0 8px 24px rgba(66, 74, 83, 0.12);
+
+  /* ----- Typography ----- */
+  --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI',
+    Helvetica, Arial, sans-serif;
+  --font-mono: SFMono-Regular, 'SF Mono', Menlo, Consolas,
+    'Liberation Mono', monospace;
+
+  --text-xs:   0.75rem;    /* 12px */
+  --text-sm:   0.8125rem;  /* 13px */
+  --text-base: 0.875rem;   /* 14px */
+  --text-md:   1rem;       /* 16px */
+  --text-lg:   1.25rem;    /* 20px */
+  --text-xl:   1.5rem;     /* 24px */
+
+  --fw-normal:   400;
+  --fw-medium:   500;
+  --fw-semibold: 600;
+  --fw-bold:     700;
+
+  /* ----- Layout metrics ----- */
+  --sidebar-width: 240px;
+  --topbar-height: 56px;
+  --tabbar-height: 42px;
+  --content-max: 1180px;
+  --table-head-height: 48px;  /* shaded table header; fits a 32px dropdown */
+}
+
+/* ==========================================================================
+   Dark theme  (activated by data-theme="dark" on <html>)
+   Only color tokens change; spacing/typography/radius stay the same.
+   ========================================================================== */
+:root[data-theme="dark"] {
+  color-scheme: dark;
+
+  /* ----- Canvas / surfaces ----- */
+  --color-canvas-default: #0d1117;
+  --color-canvas-subtle:  #161b22;
+  --color-canvas-inset:   #010409;
+  --color-canvas-hover:   #21262d;
+  --color-canvas-active:  #282e33;
+  --color-canvas-overlay: rgba(1, 4, 9, 0.8);
+
+  /* ----- Borders ----- */
+  --color-border-default: #30363d;
+  --color-border-muted:   #21262d;
+  --color-border-hover:   #6e7681;
+
+  /* ----- Foreground text ----- */
+  --color-fg-default:     #e6edf3;
+  --color-fg-muted:       #8b949e;
+  --color-fg-subtle:      #6e7681;
+  --color-fg-on-emphasis: #0d1117;
+
+  /* ----- Accent (neutral emphasis becomes near-white in dark) ----- */
+  --color-accent-fg:        #e6edf3;
+  --color-accent-emphasis:  #e6edf3;
+  --color-accent-subtle:    #21262d;
+
+  /* ----- System blue ----- */
+  --color-accent-blue:        #2f81f7;
+  --color-accent-blue-hover:  #4184e4;
+  --color-accent-blue-subtle: rgba(56, 139, 253, 0.15);
+
+  /* ----- Emphasis (primary buttons: light bg, dark text) ----- */
+  --color-btn-primary-bg:       #e6edf3;
+  --color-btn-primary-bg-hover: #ffffff;
+  --color-btn-primary-fg:       #0d1117;
+
+  /* ----- Semantic status (brighter for dark bg) ----- */
+  --color-success-fg:  #3fb950;
+  --color-danger-fg:   #f85149;
+  --color-attention-fg:#d29922;
+  --color-done-fg:     #a371f7;
+
+  /* ----- Shadows ----- */
+  --shadow-resting: 0 1px 0 rgba(0, 0, 0, 0.3);
+  --shadow-overlay: 0 8px 24px rgba(1, 4, 9, 0.5);
+}
+
+/* ==========================================================================
+   Base reset  (replaces Tailwind Preflight, which is no longer imported)
+   ========================================================================== */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  font-family: var(--font-sans);
+  font-size: var(--text-base);
+  line-height: 1.5;
+  color: var(--color-fg-default);
+  background-color: var(--color-canvas-default);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  font-synthesis: none;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: var(--fw-semibold);
+  line-height: 1.25;
+}
+
+button {
+  font-family: inherit;
+  font-size: inherit;
+  color: inherit;
+  background: transparent;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+}
+
+input,
+select,
+textarea {
+  font-family: inherit;
+  font-size: inherit;
+  color: inherit;
+}
+
+a {
+  color: var(--color-accent-blue);
+  text-decoration: none;
+}
+a:hover {
+  /* text-decoration: underline; */
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+/* Scrollbars – slim, neutral */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-border-default);
+  border-radius: var(--radius-full);
+  border: 2px solid var(--color-canvas-default);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-border-hover);
+}
+
+/* ==========================================================================
+   Shared utility / component classes
+   ========================================================================== */
+
+/* Section header: title with a hairline divider underneath (GitHub style).
+   Replaces the old card-title look now that boxes are gone. */
+.subtitle {
+  width: 100%;
+  font-size: var(--text-xl);
+  font-weight: var(--fw-bold);
+  color: var(--color-fg-default);
+  padding-bottom: var(--space-2);
+  /* margin-bottom: var(--space-3); */
+  /* border-bottom: 1px solid var(--color-border-muted); */
+}
+
+/* A header row that keeps the title inline with actions (e.g. a year select) */
+.section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  width: 100%;
+  padding-bottom: var(--space-2);
+  margin-bottom: var(--space-3);
+  /* border-bottom: 1px solid var(--color-border-muted); */
+}
+.section-header .subtitle {
+  border-bottom: none;
+  padding-bottom: 0;
+  margin-bottom: 0;
+}
+
+.divider {
+  height: 1px;
+  width: 100%;
+  background: var(--color-border-muted);
+  border: 0;
+}
+
+.text-muted {
+  color: var(--color-fg-muted);
+}
+
+.info-bold {
+  color: var(--color-fg-default);
+  font-weight: var(--fw-semibold);
+  font-size: var(--text-md);
+}
+
+.info-secondary {
+  font-weight: var(--fw-normal);
+  font-size: var(--text-base);
+  color: var(--color-fg-muted);
+}
+
+/* Data tables / list rows – flat, divided by hairlines */
+.data-table {
+  width: 100%;
+  font-size: var(--text-base);
+}
+.data-table thead th {
+  text-align: left;
+  font-weight: var(--fw-semibold);
+  color: var(--color-fg-muted);
+  font-size: var(--text-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  padding: var(--space-2) var(--space-3);
+  border-bottom: 1px solid var(--color-border-default);
+}
+.data-table tbody td {
+  padding: var(--space-2) var(--space-3);
+  border-bottom: 1px solid var(--color-border-muted);
+}
+.data-table tbody tr:hover {
+  background: var(--color-canvas-subtle);
+}
+
+/* GitHub-style "Label" pill */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  height: 20px;
+  padding: 0 var(--space-2);
+  border-radius: var(--radius-full);
+  border: 1px solid var(--color-border-default);
+  font-size: var(--text-xs);
+  font-weight: var(--fw-semibold);
+  line-height: 1;
+  color: var(--color-fg-muted);
+  background: var(--color-canvas-subtle);
+}
+
+/* GitHub-style buttons for forms / actions */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  height: 32px;
+  padding: 0 var(--space-3);
+  font-size: var(--text-base);
+  font-weight: var(--fw-medium);
+  color: var(--color-fg-default);
+  background: var(--color-canvas-subtle);
+  border: 1px solid var(--color-border-default);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: background-color 0.08s ease, border-color 0.08s ease;
+}
+.btn:hover {
+  background: var(--color-canvas-hover);
+  border-color: var(--color-border-hover);
+}
+.btn:disabled {
+  color: var(--color-fg-subtle);
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+.btn-primary {
+  color: var(--color-btn-primary-fg);
+  background: var(--color-btn-primary-bg);
+  border-color: var(--color-btn-primary-bg);
+  box-shadow: var(--shadow-resting);
+}
+.btn-primary:hover {
+  background: var(--color-btn-primary-bg-hover);
+  border-color: var(--color-btn-primary-bg-hover);
+}
+.btn-danger {
+  color: var(--color-danger-fg);
+  border-color: var(--color-border-default);
+}
+.btn-danger:hover {
+  color: #ffffff;
+  background: var(--color-danger-fg);
+  border-color: var(--color-danger-fg);
+}
+
+/* Form controls */
+.input,
+input.input,
+select.input {
+  height: 32px;
+  width: 100%;
+  padding: 0 var(--space-3);
+  background: var(--color-canvas-default);
+  border: 1px solid var(--color-border-default);
+  border-radius: var(--radius-md);
+  color: var(--color-fg-default);
+  transition: border-color 0.08s ease, box-shadow 0.08s ease;
+}
+.input:focus,
+input.input:focus,
+select.input:focus {
+  outline: none;
+  border-color: var(--color-accent-blue);
+  box-shadow: 0 0 0 3px var(--color-accent-blue-subtle);
+}
+
+/* Contained table surface — matches the Trade Center cap table:
+   rounded, hairline border, shaded header row, soft row dividers.
+   Wrap a header row + divided body rows in this to get the look. */
+.table-card {
+  width: 100%;
+  background: var(--color-canvas-default);
+  border: 1px solid var(--color-border-default);
+  /* border-radius: var(--radius-md); */
+  border-radius: 6px;
+  overflow: hidden;
+}
+.table-card-head {
+  display: flex;
+  align-items: center;
+  min-height: var(--table-head-height);
+  background: var(--color-canvas-subtle);
+  color: var(--color-fg-muted);
+  font-weight: var(--fw-semibold);
+  border-bottom: 1px solid var(--color-border-muted);
+}
+.table-empty {
+  padding: var(--space-3);
+  color: var(--color-fg-muted);
+}
+/* readable title inside a shaded table-card header */
+.table-head-title {
+  padding: 0 var(--space-4);
+  font-size: var(--text-md);
+  color: var(--color-fg-default);
+}
+/* padded content area (forms / prose) inside a table-card */
+.table-body {
+  width: 100%;
+  padding: var(--space-5);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+/* A divided row inside a .table-card (menus, lists). */
+.table-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  width: 100%;
+  padding: var(--space-3) var(--space-4);
+  color: var(--color-fg-default);
+  border-bottom: 1px solid var(--color-border-muted);
+  transition: background-color 0.1s ease;
+}
+.table-row:last-child {
+  border-bottom: none;
+}
+/* clickable menu row (rendered as a link or with an onClick) */
+.table-row-link {
+  cursor: pointer;
+}
+.table-row-link:hover {
+  background: var(--color-canvas-subtle);
+  text-decoration: none;
+  color: var(--color-fg-default);
+}
+
+/* Subscription status dot + colors (shared: LeagueCard, SubscriptionPage) */
+.sub-status {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.active-sub { background-color: var(--color-success-fg); }
+.free-trial { background-color: var(--color-attention-fg); }
+.inactive-sub { background-color: var(--color-fg-subtle); }
+
+/* My-leagues row: left content grows, subscription status pinned right */
+.league-row-main {
+  flex: 1;
+  min-width: 0;
+}
+.league-sub-status {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  flex-shrink: 0;
+  color: var(--color-fg-muted);
+  font-size: var(--text-base);
+}
+
+/* right column of a My-leagues row: status on top, rename button below */
+.league-card-side {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: var(--space-2);
+  flex-shrink: 0;
+}
+
+/* league name + rename button laid out on the League Settings page */
+.settings-name-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--space-3);
+  width: 100%;
+}
+
+/* GitHub-style League Settings form: each setting is a titled section with a
+   rule under the heading, a description, then the control. */
+.form-container.settings-form {
+  align-items: flex-start;
+  gap: var(--space-5);
+}
+.setting-field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  width: 100%;
+}
+.setting-field-head {
+  font-size: var(--text-md);
+  font-weight: var(--fw-semibold);
+  color: var(--color-fg-default);
+  padding-bottom: var(--space-2);
+  border-bottom: 1px solid var(--color-border-default);
+}
+.setting-field-desc {
+  font-size: var(--text-base);
+  color: var(--color-fg-muted);
+  margin-bottom: var(--space-1);
+  max-width: 640px;
+}
+
+/* A bounded surface for forms / standalone content that still needs an edge */
+.box {
+  background: var(--color-canvas-default);
+  border: 1px solid var(--color-border-default);
+  border-radius: var(--radius-md);
+  padding: var(--space-4);
+}
+
+/* Animations kept from the old design (used across components) */
+@keyframes fade_in {
+  from { opacity: 0; transform: translateY(4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes slide_in {
+  from { transform: translateX(4px); }
+  to   { transform: translateX(0); }
+}
+@keyframes spin {
+  0%   { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}

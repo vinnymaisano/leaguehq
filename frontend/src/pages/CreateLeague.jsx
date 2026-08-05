@@ -1,5 +1,6 @@
 import axios from "axios"
 import { useState } from "react"
+import Card from "../components/Card"
 import SearchResult from '../components/SearchResult'
 import Spinner from '../components/Spinner'
 import "../css/CreateLeague.css"
@@ -26,7 +27,6 @@ export default function CreateLeague() {
             const leagues = await axios.post(
                 "/api/leagues/search", formData
             )
-            // console.log(leagues.data)
             setResults(leagues.data)
         } catch (err) {
             console.error("Error fetching leagues: ", err.message)
@@ -64,15 +64,16 @@ export default function CreateLeague() {
     }
     if (!isVerified) {
         return (
-            <>
-                <div className="subtitle">Create league</div>
-                <div>You must verify your account before creating a league.</div>
-            </>
+            <Card table maxWidth={"560px"}>
+                <div className="table-card-head table-head-title">Create league</div>
+                <div className="table-body">You must verify your account before creating a league.</div>
+            </Card>
         )
     }
     return (
-        <>
-        <div className="subtitle">Create league</div>
+        <Card table maxWidth={"560px"}>
+            <div className="table-card-head table-head-title">Create league</div>
+            <div className="table-body">
             <div className="form-container">
                     
                     <div className="input-container">
@@ -94,9 +95,9 @@ export default function CreateLeague() {
                         {loading && (
                             <>
                                 <Spinner />
-                            <div className="loading">
-                                Searching...
-                            </div>
+                                <div className="loading">
+                                    Searching...
+                                </div>
                             </>
                         )}
 
@@ -106,7 +107,6 @@ export default function CreateLeague() {
                                     <ul className="bulleted-list">
                                         <li>Your Sleeper username or Sleeper league ID was entered correctly</li>
                                         <li>Your league is a dynasty league</li>
-                                        {/* <li>Your league's draft type is set to auction</li> */}
                                         <li>Your league's waiver type is set to FAAB</li>
                                     </ul>
                                 </div>
@@ -129,6 +129,7 @@ export default function CreateLeague() {
                         })}
                     </div>
             </div>
-        </>
+            </div>
+        </Card>
     )
 }

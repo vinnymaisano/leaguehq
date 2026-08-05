@@ -1,12 +1,11 @@
 import { Link } from "react-router-dom";
-import { FaAngleLeft } from "react-icons/fa";
+import { LuChevronLeft } from "react-icons/lu";
 
 export default function BackButton({to}) {
     return (
-        <div className="back-button">
-            <Link to={to}>
-                <FaAngleLeft className="nav-button"/>
-            </Link>
-        </div>
+        <Link to={to} className="back-button">
+            <LuChevronLeft className="back-button-icon"/>
+            <span>Back</span>
+        </Link>
     )
 }

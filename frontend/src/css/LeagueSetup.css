@@ -1,8 +1,9 @@
 input.read-only {
-    font-style: italic;
-    background-color: rgba(255, 255, 255, 0);
+  font-style: italic;
+  background-color: var(--color-canvas-subtle);
+  color: var(--color-fg-muted);
 }
 
 input.read-only:hover {
-    cursor: not-allowed;
+  cursor: not-allowed;
 }

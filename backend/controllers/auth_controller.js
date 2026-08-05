@@ -120,6 +120,7 @@ export async function register(req, res) {
 
 export async function login(req, res) {
     let {username, password} = req.body
+    console.log("login body", req.body)
     username = username.trim()
     password = password.trim()
     const input = username.toLowerCase()

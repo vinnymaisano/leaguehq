@@ -1,6 +1,7 @@
 import axios from "axios"
 import { useState, useEffect } from "react"
 import { useAuth } from "../contexts/AuthContext"
+import Card from "../components/Card"
 import SubCard from "../components/SubCard"
 import Spinner from "../components/Spinner"
 
@@ -27,17 +28,19 @@ export default function AccountPurchases() {
     }, [user])
 
     return (
-        <div className="content-gap">
-            <div className="subtitle">Purchases</div>
-            {!loading && purchases.length === 0 && <div>No purchase history.</div>}
-            {purchases.map(p => (
-                <SubCard key={p._id} sub={p}/>
-            ))}
-            {loading && (
-                <div className="spinner-container">
+        <Card table maxWidth={"720px"}>
+            <div className="table-card-head table-head-title">Purchases</div>
+            {loading ? (
+                <div className="table-empty">
                     <Spinner />
                 </div>
+            ) : purchases.length === 0 ? (
+                <div className="table-empty">No purchase history.</div>
+            ) : (
+                purchases.map(p => (
+                    <SubCard key={p._id} sub={p}/>
+                ))
             )}
-        </div>
+        </Card>
     )
 }

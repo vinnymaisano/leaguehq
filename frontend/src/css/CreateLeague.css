@@ -1,27 +1,27 @@
 div.container {
-    border: 1px solid black;
-    display: flex;
-    justify-content: center;
+  display: flex;
+  justify-content: center;
 }
 
 div.search-results {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    align-items: center;
-    width: 100%;
-    margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  align-items: center;
+  width: 100%;
+  margin-top: var(--space-3);
 }
 
 div.loading {
-    animation: fade_in 0.1s forwards;
+  animation: fade_in 0.1s forwards;
 }
 
 div.no-results {
-    animation: fade_in 0.1s forwards;
+  animation: fade_in 0.1s forwards;
+  color: var(--color-fg-muted);
 }
 
 ul.bulleted-list {
-    list-style-type: disc;
-    padding-left: 35px;
+  list-style-type: disc;
+  padding-left: 35px;
 }

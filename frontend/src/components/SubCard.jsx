@@ -1,5 +1,3 @@
-import Card from "./Card"
-
 const formatDateTime = (date) => {
     const d = new Date(date);
     const dateStr = d.toLocaleDateString("en-US");
@@ -9,12 +7,14 @@ const formatDateTime = (date) => {
 
 export default function SubCard({sub}) {
     return (
-        <Card width={"100%"} key={sub.year}>
-            <div className="league-name">{sub.league_name && `${sub.league_name} - `} {sub.season} season</div>
-            <div>Sleeper league ID: {sub.sleeper_league_id}</div>
-            <div>Purchased by: {sub?.purchased_by?.username || "deleted-user"}</div>
-            <div>Total: ${sub.price}.00</div>
-            <div>Date purchased: {formatDateTime(new Date(sub.purchased_at))}</div>
-        </Card>
+        <div className="table-row">
+            <div className="league-row-main">
+                <div className="league-name">{sub.league_name && `${sub.league_name} - `} {sub.season} season</div>
+                <div className="league-meta">Sleeper league ID: {sub.sleeper_league_id}</div>
+                <div className="league-meta">Purchased by: {sub?.purchased_by?.username || "deleted-user"}</div>
+                <div className="league-meta">Total: ${sub.price}.00</div>
+                <div className="league-meta">Date purchased: {formatDateTime(new Date(sub.purchased_at))}</div>
+            </div>
+        </div>
     )
 }

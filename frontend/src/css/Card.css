@@ -1,31 +1,32 @@
-.generic-card {
-    min-height: 100%;
-    box-sizing: border-box;
-    box-shadow: 4px 4px 10px 0 rgba(0, 0, 0, 0.15);
-    background-color: white;
-    color: rgb(115, 115, 115);
-    border-radius: 7px;
-    padding: 15px;
-    animation: fade_in 0.05s ease-out forwards;
-    overflow-x: scroll;
-}
+/* Card is now a flat, borderless section wrapper (no glass / blur / shadow).
+   Visual structure comes from section headers + dividers + tables instead. */
 
 .glass-card {
-  overflow-x: auto;
-  overflow-y: auto;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  background: rgba(255, 255, 255, 0.4);
-  border-radius: 10px;
-  box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.15);
-  backdrop-filter: blur(0px); /* the glass effect */
-  -webkit-backdrop-filter: blur(10px); /* for Safari */
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  padding: 10px;
-  color: rgb(60, 60, 60);
-  animation: fade_in 0.15s ease-out forwards;
-  transition: background-color 0.1s linear;
+  width: 100%;
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+  padding: 0;
+  color: var(--color-fg-default);
+  overflow: auto;
+  animation: fade_in 0.07s ease-out forwards;
+}
+
+/* Legacy generic card kept flat for any stragglers still using it */
+.generic-card {
+  min-height: 100%;
+  box-sizing: border-box;
+  background: var(--color-canvas-default);
+  color: var(--color-fg-default);
+  border: 1px solid var(--color-border-default);
+  border-radius: var(--radius-md);
+  padding: var(--space-4);
+  animation: fade_in 0.12s ease-out forwards;
+  overflow-x: auto;
 }
 
 .card-content {
@@ -37,46 +38,17 @@
   height: 100%;
 }
 
+/* Clickable cards (e.g. league tiles) become bordered, hoverable rows */
+.card-hover {
+  background: var(--color-canvas-default);
+  border: 1px solid var(--color-border-default);
+  border-radius: var(--radius-md);
+  padding: var(--space-4);
+  transition: background-color 0.12s ease, border-color 0.12s ease;
+}
 .card-hover:hover {
   cursor: pointer;
-  /* background-color: rgba(234, 243, 255, 1); */
-  /* background-color: rgba(213, 231, 255, 0.7); */
-  background-color: rgba(0, 0, 0, 0.01);
-  /* border: 1px solid rgb(133, 186, 255); */
-  /* border: 1px solid rgba(0, 0, 0, 0.1); */
-  color: black;
-  transition: background-color 0.2s linear;
+  background: var(--color-canvas-subtle);
+  border-color: var(--color-border-hover);
+  color: var(--color-fg-default);
 }
-/* Target the horizontal scrollbar */
-::-webkit-scrollbar {
-  width: 6px;
-  height: 6px; /* Height for horizontal scrollbar */
-}
-
-/* Track (the background of the scrollbar) */
-::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-/* Thumb (the draggable part) */
-::-webkit-scrollbar-thumb {
-  background: rgba(208, 216, 230, 0.8);
-  border-radius: 6px;
-}
-
-/* On hover */
-::-webkit-scrollbar-thumb:hover {
-  background: rgba(208, 216, 230, 1);
-  cursor: pointer;
-}
-
-@keyframes fade_in {
-    from {
-      opacity: 0;
-      transform: translateY(5px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }

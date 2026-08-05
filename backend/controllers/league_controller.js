@@ -1,4 +1,4 @@
-import {create_subscription, get_latest_transactions, import_contracts, delete_contracts, create_contract, get_players, delete_league, fetch_league, fetch_multiple_leagues, fetch_users, save_assignments, upload_contract_extension, get_users_by_username, add_user_to_league, remove_user_from_league, upload_edited_contracts, save_league_settings, update_draft_rounds, delete_one_contract, get_standings_map, fetch_league_sub_history, fetch_user_sub_history, update_sleeper_leagues} from '../services/league_service.js'
+import {create_subscription, get_latest_transactions, import_contracts, delete_contracts, create_contract, get_players, delete_league, fetch_league, fetch_multiple_leagues, fetch_users, save_assignments, upload_contract_extension, get_users_by_username, add_user_to_league, remove_user_from_league, upload_edited_contracts, save_league_settings, rename_league as rename_league_service, update_draft_rounds, delete_one_contract, get_standings_map, fetch_league_sub_history, fetch_user_sub_history, update_sleeper_leagues} from '../services/league_service.js'
 import { pollLeagues } from '../services/transaction_poller.js'
 import mongoose from "mongoose"
 import axios from "axios"
@@ -319,6 +319,20 @@ export async function update_league_settings(req, res) {
   }
 }
 
+export async function rename_league(req, res) {
+  const user_id = req.user.user_id
+  const {league_id} = req.params
+  const {custom_name} = req.body
+  try {
+    const saved_name = await rename_league_service(league_id, user_id, custom_name)
+    res.json({success: true, custom_name: saved_name})
+  } catch (err) {
+    const status = err.statusCode || 500
+    console.error("Error renaming league:", err.message)
+    res.status(status).json({success: false, message: err.message})
+  }
+}
+
 export async function get_player_info(req, res) {
     const league_id = req.params.league_id
     const player_ids = req.body // array of player ids
@@ -381,7 +395,7 @@ export async function get_rosters(req, res) {
     // use api to get player info (name, position, team etc.)
     const all_player_ids = combined.flatMap(team => team.players || [])
     const response = await axios.post(
-        `http://localhost:5000/api/${league_id}/player-info`,
+        `http://localhost:5000/api/leagues/${league_id}/player-info`,
         all_player_ids
     )
     

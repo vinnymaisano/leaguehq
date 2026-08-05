@@ -97,9 +97,7 @@ export default function LeagueSetup() {
 
     function change_salary_data(e) {
         const {name, value} = e.target
-        // console.log(name, value)
         if (isNaN(value.slice(1))) {
-            // console.log("returning")
             return
         }
 
@@ -115,7 +113,6 @@ export default function LeagueSetup() {
 
     async function submit_form(e) {
         e.preventDefault()
-        // console.log(formData)
         try {
             setLoading(true)
             // creates the league
@@ -179,10 +176,7 @@ export default function LeagueSetup() {
                             <InputInfo description="Length of contracts for players drafted via the auction draft. Recommended: 3 years">?</InputInfo>
                         </div>
                         <select name="auction_contract_length" value={formData.auction_contract_length} onChange={change_form_data} className="dropdown">
-                            <option value={1}>1 year</option>
-                            <option value={2}>2 years</option>
-                            <option value={3}>3 years</option>
-                            <option value={4}>4 years</option>
+                            {[1, 2, 3, 4].map(y => <option key={y} value={y}>{y === 1 ? "1 year" : `${y} years`}</option>)}
                         </select>
                     </div>
 
@@ -192,10 +186,7 @@ export default function LeagueSetup() {
                             <InputInfo description="Length of rookie contracts. Recommended: 3 years">?</InputInfo>
                         </div>
                         <select name="rookie_contract_length" value={formData.rookie_contract_length} onChange={change_form_data} className="dropdown">
-                            <option value={1}>1 year</option>
-                            <option value={2}>2 years</option>
-                            <option value={3}>3 years</option>
-                            <option value={4}>4 years</option>
+                            {[1, 2, 3, 4].map(y => <option key={y} value={y}>{y === 1 ? "1 year" : `${y} years`}</option>)}
                         </select>
                     </div>
 
@@ -205,10 +196,7 @@ export default function LeagueSetup() {
                             <InputInfo description="Max number of years a contract can be extended. Recommended: 3 years">?</InputInfo>
                         </div>
                         <select name="max_extension_length" value={formData.max_extension_length} onChange={change_form_data} className="dropdown">
-                            <option value={1}>1 year</option>
-                            <option value={2}>2 years</option>
-                            <option value={3}>3 years</option>
-                            <option value={4}>4 years</option>
+                            {[1, 2, 3, 4].map(y => <option key={y} value={y}>{y === 1 ? "1 year" : `${y} years`}</option>)}
                         </select>
                     </div>
 

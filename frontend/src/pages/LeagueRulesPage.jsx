@@ -6,15 +6,14 @@ import ConfirmationDialog from "../components/ConfirmationDialog"
 import { useState, useEffect } from "react"
 import { useParams } from "react-router-dom"
 import { Link } from "react-router-dom"
-import { FaAngleLeft } from "react-icons/fa"
-import InputInfo from "../components/InputInfo"
 import axios from "axios"
 import { useLeague } from "../contexts/LeagueContext"
-import BackButton from "../components/BackButton"
+import { league_display_name } from "../utils/utils"
+import RenameLeagueButton from "../components/RenameLeagueButton"
 
 export default function LeagueRulesPage() {
     const {league_id} = useParams()
-    const {league, setLeague, leagueYear} = useLeague()
+    const {league, setLeague, leagueYear, isOwner, isCommish} = useLeague()
     const [formData, setFormData] = useState(null)
     const [defaults, setDefaults] = useState(null)
     const [errorMessage, setErrorMessage] = useState("")
@@ -66,7 +65,6 @@ export default function LeagueRulesPage() {
         // compute rookie salaries
         const default_rookie_salaries = {}
         for (let i = 1; i <= numRounds; i++) {
-            // console.log("round", i, "$", compute_salary(i)) 
             default_rookie_salaries[i] = compute_salary(i)
         }
         setDefaults({
@@ -84,10 +82,6 @@ export default function LeagueRulesPage() {
         const {name, value} = e.target
         if (isNaN(value.slice(1))) return
 
-        // console.log({
-        //     ...formData,
-        //     [name]: value.charAt(0) === "$" ? Number(value.slice(1)): Number(value)
-        // })
         setFormData({
             ...formData,
             [name]: value.charAt(0) === "$" ? Number(value.slice(1)): Number(value)
@@ -96,19 +90,11 @@ export default function LeagueRulesPage() {
 
     function change_salary_data(e) {
         const {name, value} = e.target
-        // console.log(name, value)
         if (isNaN(value.slice(1))) {
             return
         }
 
         const round = parseInt(name[5])
-        // console.log({
-        //     ...formData,
-        //     rookie_salaries: {
-        //         ...formData.rookie_salaries,
-        //         [round]: Number(value.slice(1))
-        //     }
-        // })
         setFormData(prev => ({
             ...prev,
             rookie_salaries: {
@@ -121,7 +107,7 @@ export default function LeagueRulesPage() {
     async function save_changes() {
         try {
             const response = await axios.put(
-                `/api/${league_id}/update-settings`,
+                `/api/leagues/${league_id}/update-settings`,
                 {formData},
                 {withCredentials: true}
             )
@@ -133,11 +119,6 @@ export default function LeagueRulesPage() {
             alert("Error updating settings:", msg)
             setErrorMessage(msg)
             console.error("Error updating settings:", msg)
-            // if (err.response?.data?.error) {
-            //     setErrorMessage(err.response.data.error);
-            // } else {
-            //     setErrorMessage("Unexpected error occurred: ", err.message);
-            // }
         }
     }
 
@@ -147,7 +128,7 @@ export default function LeagueRulesPage() {
 
     async function update_num_rounds() {
         try {
-            const res = await axios.put(`/api/${league_id}/update-rounds`,
+            const res = await axios.put(`/api/leagues/${league_id}/update-rounds`,
                 {},
                 {withCredentials: true}
             )
@@ -192,91 +173,78 @@ export default function LeagueRulesPage() {
     return (
         <>
         <div className="mainpanel">
-            <Row center={true} height={""}>
-                <Card width={"750px"} height={"100%"}>
-                    <div className="header-backbutton">
-                        <BackButton to={`/league/${league_id}/settings`}/>
-                        <span className="subtitle">League settings</span>
-                    </div>
-
-                    <div className="league-name">{league?.name}</div>
-                            <div className="form-container">            
-                                <div className="input-container">
-                                    <div className="label">
-                                        Salary cap
-                                        <InputInfo description="Salary cap for your league. Default value is the budget for your league's initial auction draft.">?</InputInfo>
-                                    </div>
+            <Row height={""}>
+                <Card gap={"var(--space-4)"}>
+                    <span className="subtitle">League settings</span>
+                    <div className="settings-name-row">
+                                <div>
+                                    <div className="league-name">{league_display_name(league)}</div>
+                                    <div className="text-muted">Sleeper: {league?.name}</div>
+                                </div>
+                                {(isOwner || isCommish) && (
+                                    <RenameLeagueButton
+                                        league={league}
+                                        onRenamed={(name) => setLeague({ ...league, custom_name: name })}
+                                    />
+                                )}
+                            </div>
+                            <div className="form-container settings-form">
+                                <div className="setting-field">
+                                    <div className="setting-field-head">Salary cap</div>
+                                    <div className="setting-field-desc">Salary cap for your league. Default value is the budget for your league's initial auction draft.</div>
                                     <input className="text-input" type="text" name="salary_cap" value={`$${formData.salary_cap}`} onChange={change_form_data}></input>
                                 </div>
-            
-                                <div className="input-container">
-                                    <div className="label">
-                                        Auction contract length
-                                        <InputInfo description="Length of contracts for players drafted via the auction draft. Recommended: 3 years">?</InputInfo>
-                                    </div>
+
+                                <div className="setting-field">
+                                    <div className="setting-field-head">Auction contract length</div>
+                                    <div className="setting-field-desc">Length of contracts for players drafted via the auction draft. Recommended: 3 years.</div>
                                     <select name="auction_contract_length" value={formData.auction_contract_length} onChange={change_form_data} className="dropdown">
-                                        <option value={1}>1 year</option>
-                                        <option value={2}>2 years</option>
-                                        <option value={3}>3 years</option>
-                                        <option value={4}>4 years</option>
+                                        {[1, 2, 3, 4].map(y => <option key={y} value={y}>{y === 1 ? "1 year" : `${y} years`}</option>)}
                                     </select>
                                 </div>
-            
-                                <div className="input-container">
-                                    <div className="label">
-                                        Rookie contract length
-                                        <InputInfo description="Length of rookie contracts. Recommended: 3 years">?</InputInfo>
-                                    </div>
+
+                                <div className="setting-field">
+                                    <div className="setting-field-head">Rookie contract length</div>
+                                    <div className="setting-field-desc">Length of rookie contracts. Recommended: 3 years.</div>
                                     <select name="rookie_contract_length" value={formData.rookie_contract_length} onChange={change_form_data} className="dropdown">
-                                        <option value={1}>1 year</option>
-                                        <option value={2}>2 years</option>
-                                        <option value={3}>3 years</option>
-                                        <option value={4}>4 years</option>
+                                        {[1, 2, 3, 4].map(y => <option key={y} value={y}>{y === 1 ? "1 year" : `${y} years`}</option>)}
                                     </select>
                                 </div>
-            
-                                <div className="input-container">
-                                    <div className="label">
-                                        Max contract extension length
-                                        <InputInfo description="Max number of years a contract can be extended. Recommended: 3 years">?</InputInfo>
-                                    </div>
+
+                                <div className="setting-field">
+                                    <div className="setting-field-head">Max contract extension length</div>
+                                    <div className="setting-field-desc">Max number of years a contract can be extended. Recommended: 3 years.</div>
                                     <select name="max_extension_length" value={formData.max_extension_length} onChange={change_form_data} className="dropdown">
-                                        <option value={1}>1 year</option>
-                                        <option value={2}>2 years</option>
-                                        <option value={3}>3 years</option>
-                                        <option value={4}>4 years</option>
+                                        {[1, 2, 3, 4].map(y => <option key={y} value={y}>{y === 1 ? "1 year" : `${y} years`}</option>)}
                                     </select>
                                 </div>
-            
-                                <div className="input-container">
-                                    <div className="label">Extension yearly salary increase
-                                        <InputInfo description={`Each additional contract year adds this amount to the player's current salary. For example, if this value is $10, then a player with a $30 salary extended 2 years becomes $50. Recommended: $${defaults.extension_price_hike}`}>?</InputInfo>
-                                    </div>
+
+                                <div className="setting-field">
+                                    <div className="setting-field-head">Extension yearly salary increase</div>
+                                    <div className="setting-field-desc">Each additional contract year adds this amount to the player's current salary. For example, if this value is $10, a player with a $30 salary extended 2 years becomes $50. Recommended: ${defaults.extension_price_hike}.</div>
                                     <input type="text"  className="text-input" name="extension_price_hike" value={`$${formData.extension_price_hike}`} onChange={change_form_data}></input>
                                 </div>
-            
+
                                 {numRounds && formData.rookie_salaries &&
                                     Array.from({ length: numRounds }, (_, i) => (
-                                        <div key={i} className="input-container">
-                                            <div className="label">
-                                                Round {i+1} rookie salary
-                                                <InputInfo description={`Salary for player drafted in round ${i+1} of rookie drafts. Recommended: $${defaults.rookie_salaries[i+1]}`}>?</InputInfo>
-                                            </div>
+                                        <div key={i} className="setting-field">
+                                            <div className="setting-field-head">Round {i+1} rookie salary</div>
+                                            <div className="setting-field-desc">Salary for a player drafted in round {i+1} of rookie drafts. Recommended: ${defaults.rookie_salaries[i+1]}.</div>
                                             <input type="text" className="text-input"  name={`round${i+1}`} value={`$${formData.rookie_salaries[i+1]}`} onChange={change_salary_data}></input>
                                         </div>
                                 ))}
-            
+
                                 <div className="error">
                                     {errorMessage}
                                 </div>
-            
+
                                 <div className="submit-container">
                                     <HeaderButton onClick={() => setShowSaveDialog(true)} background={true}>Save</HeaderButton>
                                     <HeaderButton onClick={() => setShowSyncDialog(true)} dynamicWidth={true}>Sync Draft Rounds</HeaderButton>
                                     <HeaderButton onClick={() => setShowResetDialog(true)}>Defaults</HeaderButton>
                                 </div>
 
-                        </div>
+                            </div>
                 </Card>
             </Row>
         </div>

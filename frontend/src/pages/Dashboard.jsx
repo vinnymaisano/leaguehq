@@ -21,9 +21,9 @@ export default function Dashboard() {
     }
 
     return (
-      <MainPanel>
+      <MainPanel fill className="dashboard">
         <Row height={"100%"}>
-          <Card headerText={"Standings"} width={"50%"} height={"100%"}>
+          <Card width={"50%"} height={"100%"}>
             <div className="subtitle">Standings</div>
             <Standings selectedYear={year} changeYear={setYear}/>
           </Card>

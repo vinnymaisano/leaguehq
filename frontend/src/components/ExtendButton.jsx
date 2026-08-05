@@ -1,26 +1,25 @@
 import { useState } from "react";
-import { FaPlus } from "react-icons/fa";
+import { LuPlus } from "react-icons/lu";
 import "../css/ExtendContract.css"
 import ExtendContractDialog from "./ExtendContractDialog";
+import SubscriptionRequiredDialog from "./SubscriptionRequiredDialog";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 
-export default function ExtendButton({current_salary, start_year, name, current_contract}) {
+export default function ExtendButton({current_salary, start_year, name, current_contract, subscribed}) {
     // toggle whether the dialog is showing
     const {league_id} = useParams()
     const [showDialog, setShowDialog] = useState(false)
+    const [showSubMessage, setShowSubMessage] = useState(false)
 
     async function handle_confirm(length) {
-        // console.log("Handling confirm with length", length)
-        // console.log("Contract being extended: ", current_contract)
         if (!current_contract) {
             alert("Error: player does not have a contract to extend.")
             setShowDialog(false)
             return
         }
         try {
-            const url = `/api/${league_id}/contracts/extend/${current_contract._id}`
-            // console.log(url)
+            const url = `/api/leagues/${league_id}/contracts/extend/${current_contract._id}`
             const res = await axios.post(
                 url,
                 {length},
@@ -38,11 +37,17 @@ export default function ExtendButton({current_salary, start_year, name, current_
 
     return (
         <>
-            <div onClick={() => setShowDialog(true)}>
-                <FaPlus className="extend-button"/>
+            <div onClick={() => subscribed ? setShowDialog(true) : setShowSubMessage(true)}>
+                <LuPlus className="extend-button"/>
             </div>
 
-            <ExtendContractDialog 
+            <SubscriptionRequiredDialog
+                isOpen={showSubMessage}
+                onClose={() => setShowSubMessage(false)}
+                action="Extending a contract"
+            />
+
+            <ExtendContractDialog
                 isOpen={showDialog}
                 onConfirm={handle_confirm}
                 onCancel={() => setShowDialog(false)}

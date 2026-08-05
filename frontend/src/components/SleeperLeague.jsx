@@ -4,7 +4,6 @@ import HeaderButton from "./HeaderButton";
 export default function SleeperLeague({league, index, can_purchase}) {
     const capitalize = str => str.charAt(0).toUpperCase() + str.slice(1);
     const first = index === 0
-    // console.log(first, league.league_id, can_purchase)
     
     return (
         <Card>
