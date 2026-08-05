@@ -6,6 +6,10 @@ LeagueHQ is a full-stack companion application designed to extend the Sleeper AP
 
 It introduces a sophisticated Salary Cap Engine that allows leagues to implement custom contract logic, salary inflation, and cap-hit calculations—transforming a standard dynasty league into a comprehensive front-office simulation.
 
+<img width="1920" height="1119" alt="Screenshot 2026-08-04 at 11 06 04 PM" src="https://github.com/user-attachments/assets/4921c155-2c77-4f89-b0d9-fd9071f1749a" />
+
+<img width="1920" height="1119" alt="Screenshot 2026-08-04 at 11 14 43 PM" src="https://github.com/user-attachments/assets/71028f7d-a767-4365-86ef-ed5632990a35" />
+
 ## 🛠️ Tech Stack
 * **Frontend:** React.js
 * **Backend:** Node.js, Express.js
