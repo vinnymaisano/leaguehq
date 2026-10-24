@@ -73,10 +73,6 @@ Every multi-document operation runs inside a **MongoDB session transaction** wit
 - Email verification and password reset flows built on cryptographically random tokens (`crypto.randomBytes`) and **Nodemailer**.
 - Role-based access control: Express middleware checks league **owner and commissioner** roles before any write to league settings or contracts. Server-side input validation uses **Joi** schemas.
 
-### Payments
-- **Stripe Checkout** integration for per-league, per-season subscriptions, with purchase history for both users and leagues.
-- Frontend route guards (`RequireSubscription`) gate premium pages behind an active trial or subscription.
-
 ### Frontend
 - **React 19 + React Router 7 SPA** with roughly 25 pages and 48 reusable components.
 - Global state through the **Context API** (`AuthContext`, `LeagueContext`, `TitleContext`), plus protected routes, owner-only routes, and subscription-gated routes.
@@ -104,7 +100,6 @@ flowchart LR
     P <--> D
     B <-->|rosters · drafts · leagues| S[Sleeper API]
     P -->|incremental txn fetch| S
-    B <--> ST[Stripe Checkout]
     B --> E[Nodemailer<br/>verify · reset]
 ```
 
@@ -126,7 +121,6 @@ flowchart LR
 * **Database:** MongoDB (storing custom contract data not available via sleeper)
 * **API:** Integration with the Sleeper API to sync league data
 * **Auth & Security:** JWT, bcrypt, Joi validation, role-based middleware
-* **Payments & Email:** Stripe Checkout, Nodemailer
 * **Infrastructure:** Nginx, graceful-shutdown process management
 
 ---
@@ -136,7 +130,6 @@ flowchart LR
 ### Prerequisites
 - Node.js 18+
 - A MongoDB **replica set** (required for multi-document transactions; MongoDB Atlas works out of the box)
-- A Stripe account (test keys are fine)
 
 ### Installation
 ```bash
